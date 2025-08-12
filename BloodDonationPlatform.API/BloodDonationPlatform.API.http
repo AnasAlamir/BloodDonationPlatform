@@ -1,0 +1,6 @@
+@BloodDonationPlatform.API_HostAddress = https://localhost:7021
+
+GET {{BloodDonationPlatform.API_HostAddress}}/api/donor/
+Accept: application/json
+
+###
