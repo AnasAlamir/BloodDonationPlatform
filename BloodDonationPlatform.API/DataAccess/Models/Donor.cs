@@ -9,7 +9,7 @@
         public int AreaId { get; set; }
         public string Gender { get; set; }
         public string PhoneNumber { get; set; }
-        public int Point { get; set; }
+        public int TotalPoints { get; set; }
 
         public BloodType BloodType { get; set; }
         public Area Area { get; set; }

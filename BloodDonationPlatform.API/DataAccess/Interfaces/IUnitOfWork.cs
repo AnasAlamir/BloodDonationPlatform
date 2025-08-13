@@ -3,7 +3,14 @@
     public interface IUnitOfWork
     {
         IDonorRepository DonorRepository { get; }
-        IBloodTypeRepository BloodTypes { get; }
+        IAdminRepository AdminRepository { get; }
+        IBloodTypeRepository BloodTypeRepository { get; }
+        IDonationRequestRepository DonationRequestRepository { get; }
+        IHospitalRepository HospitalRepository { get; }
+        IInventoryRepository InventoryRepository { get; }
+        IDonorDonationRequestRepository DonorDonationRequestRepository { get; }
+        IAreaRepository AreaRepository { get; }
+        ICityRepository CityRepository { get; }
         void Save();
     }
 }

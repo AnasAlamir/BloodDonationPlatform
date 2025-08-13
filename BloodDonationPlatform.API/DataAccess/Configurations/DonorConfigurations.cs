@@ -3,7 +3,7 @@ using BloodDonationPlatform.API.DataAccess.Models;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
 
-public class DonerConfigurations : IEntityTypeConfiguration<Donor>
+public class DonorConfigurations : IEntityTypeConfiguration<Donor>
 {
     public void Configure(EntityTypeBuilder<Donor> builder) // Fixed method name
     {

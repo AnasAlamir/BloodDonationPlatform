@@ -9,6 +9,7 @@
         public Donor Donor { get; set; }
 
         public int DonationRequestId { get; set; }
+        public bool? DonorApprovalStatus { get; set; }
         public DonationRequest DonationRequest { get; set; }
 
         public DateTime LastDateOfDonation { get; set; }

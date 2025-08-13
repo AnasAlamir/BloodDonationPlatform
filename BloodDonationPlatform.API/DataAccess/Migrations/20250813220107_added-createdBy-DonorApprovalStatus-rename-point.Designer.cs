@@ -4,6 +4,7 @@ using BloodDonationPlatform.API.DataAccess.DataContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BloodDonationPlatform.API.DataAccess.Migrations
 {
     [DbContext(typeof(BloodDonationDbContext))]
-    partial class BloodDonationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250813220107_added-createdBy-DonorApprovalStatus-rename-point")]
+    partial class addedcreatedByDonorApprovalStatusrenamepoint
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -56,50 +59,13 @@ namespace BloodDonationPlatform.API.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CityId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CityId");
-
                     b.ToTable("Areas");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CityId = 1,
-                            Name = "Maadi"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CityId = 1,
-                            Name = "Helwan"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            CityId = 1,
-                            Name = "Ramses"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            CityId = 2,
-                            Name = "El Omarania"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            CityId = 3,
-                            Name = "Naga Elarab"
-                        });
                 });
 
             modelBuilder.Entity("BloodDonationPlatform.API.DataAccess.Models.BloodType", b =>
@@ -176,28 +142,6 @@ namespace BloodDonationPlatform.API.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Cities");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Cairo"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "Giza"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = "Alexanderia"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Name = "Aswan"
-                        });
                 });
 
             modelBuilder.Entity("BloodDonationPlatform.API.DataAccess.Models.DonationRequest", b =>
@@ -378,18 +322,7 @@ namespace BloodDonationPlatform.API.DataAccess.Migrations
                     b.HasOne("BloodDonationPlatform.API.DataAccess.Models.City", "City")
                         .WithMany("Admin")
                         .HasForeignKey("CityId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.Navigation("City");
-                });
-
-            modelBuilder.Entity("BloodDonationPlatform.API.DataAccess.Models.Area", b =>
-                {
-                    b.HasOne("BloodDonationPlatform.API.DataAccess.Models.City", "City")
-                        .WithMany("Area")
-                        .HasForeignKey("CityId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("City");
@@ -501,8 +434,6 @@ namespace BloodDonationPlatform.API.DataAccess.Migrations
             modelBuilder.Entity("BloodDonationPlatform.API.DataAccess.Models.City", b =>
                 {
                     b.Navigation("Admin");
-
-                    b.Navigation("Area");
                 });
 
             modelBuilder.Entity("BloodDonationPlatform.API.DataAccess.Models.DonationRequest", b =>
