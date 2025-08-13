@@ -12,6 +12,13 @@ namespace BloodDonationPlatform.API.DataAccess
         {
             services.AddScoped<IDonorRepository, DonorRepository>();
             services.AddScoped<IBloodTypeRepository, BloodTypeRepository>();
+            services.AddScoped<IAdminRepository, AdminRepository>();
+            services.AddScoped<IDonationRequestRepository, DonationRequestRepository>();
+            services.AddScoped<IHospitalRepository, HospitalRepository>();
+            services.AddScoped<IInventoryRepository, InventoryRepository>();
+            services.AddScoped<IDonorDonationRequestRepository, DonorDonationRequestRepository>();
+            services.AddScoped<IAreaRepository, AreaRepository>();
+            services.AddScoped<ICityRepository, CityRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork.UnitOfWork>();
 
             // Add DbContext to dependency injection

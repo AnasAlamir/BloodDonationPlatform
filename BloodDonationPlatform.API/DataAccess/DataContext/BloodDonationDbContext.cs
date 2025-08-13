@@ -1,5 +1,6 @@
 ﻿using BloodDonationPlatform.API.DataAccess.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 namespace BloodDonationPlatform.API.DataAccess.DataContext
 {
     internal class BloodDonationDbContext : DbContext
@@ -9,25 +10,20 @@ namespace BloodDonationPlatform.API.DataAccess.DataContext
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
             base.OnModelCreating(modelBuilder);
-
-            // Seed blood types
-            var bloodTypes = new List<BloodType>
-            {
-                new BloodType { Id = 1, Name = "A+" },
-                new BloodType { Id = 2, Name = "A-" },
-                new BloodType { Id = 3, Name = "B+" },
-                new BloodType { Id = 4, Name = "B-" },
-                new BloodType { Id = 5, Name = "AB+" },
-                new BloodType { Id = 6, Name = "AB-" },
-                new BloodType { Id = 7, Name = "O+" },
-                new BloodType { Id = 8, Name = "O-" }
-            };
-
-            modelBuilder.Entity<BloodType>().HasData(bloodTypes);
         }
 
         public DbSet<Donor> Donors { get; set; }
+        public DbSet<Admin> Admins { get; set; }
+        public DbSet<City> Cities { get; set; }
+        public DbSet<Area> Areas { get; set; }
         public DbSet<BloodType> BloodTypes { get; set; }
+        public DbSet<Hospital> Hospitals { get; set; }
+        public DbSet<DonorDonationRequest> DonorDonationRequests { get; set; }
+        public DbSet<DonationRequest> DonationRequests { get; set; }
+        public DbSet<Inventory> Inventories { get; set; }
+        public DbSet<BloodType> BloodType { get; set; }
+
     }
 }
