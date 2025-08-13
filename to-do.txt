@@ -1,0 +1,7 @@
+- rename states Request to RequestStatus in donation Request (not urgent)
+-----------------
+--DONE
+- seed area data
+- seed city data 
+-create relationship between area and city (put fk from city to area)
+- no action with area and city
