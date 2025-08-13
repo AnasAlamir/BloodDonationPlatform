@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
 
-namespace BloodDonationPlatform.API.Data.Migrations
+namespace BloodDonationPlatform.API.DataAccess.Migrations
 {
     /// <inheritdoc />
     public partial class InitialCreate : Migration
@@ -86,8 +86,7 @@ namespace BloodDonationPlatform.API.Data.Migrations
                     AreaId = table.Column<int>(type: "int", nullable: false),
                     Gender = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PhoneNumber = table.Column<string>(type: "nvarchar(12)", maxLength: 12, nullable: false),
-                    Point = table.Column<int>(type: "int", nullable: false),
-                    BloodTypeId1 = table.Column<int>(type: "int", nullable: true)
+                    Point = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -103,12 +102,7 @@ namespace BloodDonationPlatform.API.Data.Migrations
                         column: x => x.BloodTypeId,
                         principalTable: "BloodType",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Donors_BloodType_BloodTypeId1",
-                        column: x => x.BloodTypeId1,
-                        principalTable: "BloodType",
-                        principalColumn: "Id");
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -169,9 +163,9 @@ namespace BloodDonationPlatform.API.Data.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     BloodTypeId = table.Column<int>(type: "int", nullable: false),
                     HospitalId = table.Column<int>(type: "int", nullable: false),
-                    Quantity = table.Column<int>(type: "int", nullable: false),
+                    Quantity = table.Column<int>(type: "int", nullable: false, defaultValue: 10),
                     ExpirationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    StatusInventory = table.Column<int>(type: "int", nullable: false)
+                    StatusInventory = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -266,11 +260,6 @@ namespace BloodDonationPlatform.API.Data.Migrations
                 name: "IX_Donors_BloodTypeId",
                 table: "Donors",
                 column: "BloodTypeId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Donors_BloodTypeId1",
-                table: "Donors",
-                column: "BloodTypeId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Hospitals_AreaId",

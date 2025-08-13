@@ -22,9 +22,10 @@ namespace BloodDonationPlatform.API.DataAccess.Configurations
             );
 
             builder.HasMany(bt => bt.Donors)
-          .WithOne(d => d.BloodType)
-          .HasForeignKey(d => d.BloodTypeId)
-          .OnDelete(DeleteBehavior.Restrict);
+                   .WithOne(d => d.BloodType)
+                   .HasForeignKey(d => d.BloodTypeId)
+                   .OnDelete(DeleteBehavior.Restrict);
+
 
             builder.HasMany(bt => bt.DonationRequests)
                    .WithOne(dr => dr.BloodType)

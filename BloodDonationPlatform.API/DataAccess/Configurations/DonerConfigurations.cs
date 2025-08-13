@@ -9,8 +9,10 @@ public class DonerConfigurations : IEntityTypeConfiguration<Donor>
     {
 
         builder.HasOne(d => d.BloodType)
-            .WithMany()
-            .OnDelete(DeleteBehavior.Cascade);
+         .WithMany(bt => bt.Donors)
+         .HasForeignKey(d => d.BloodTypeId)
+         .OnDelete(DeleteBehavior.Restrict); 
+
 
         builder.HasOne(d => d.Area)
         .WithMany(a => a.Donors)

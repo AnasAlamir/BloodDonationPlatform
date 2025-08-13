@@ -18,6 +18,14 @@
                    .WithMany(h => h.Inventory)
                    .HasForeignKey(id => id.HospitalId)
                    .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Property(i => i.Quantity)
+                   .IsRequired()
+                   .HasDefaultValue(10);
+
+            builder.Property(o => o.StatusInventory)
+                .HasConversion(s => s.ToString(), s => Enum.Parse<StatusInventory>(s));
+
         }
     }
 }

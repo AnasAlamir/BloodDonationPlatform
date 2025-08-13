@@ -4,19 +4,16 @@ using BloodDonationPlatform.API.DataAccess.DataContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace BloodDonationPlatform.API.Data.Migrations
+namespace BloodDonationPlatform.API.DataAccess.Migrations
 {
     [DbContext(typeof(BloodDonationDbContext))]
-    [Migration("20250812235204_InitialCreate")]
-    partial class InitialCreate
+    partial class BloodDonationDbContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -192,9 +189,6 @@ namespace BloodDonationPlatform.API.Data.Migrations
                     b.Property<int>("BloodTypeId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("BloodTypeId1")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("DateOfBirth")
                         .HasColumnType("datetime2");
 
@@ -223,8 +217,6 @@ namespace BloodDonationPlatform.API.Data.Migrations
                     b.HasIndex("AreaId");
 
                     b.HasIndex("BloodTypeId");
-
-                    b.HasIndex("BloodTypeId1");
 
                     b.ToTable("Donors");
                 });
@@ -299,10 +291,13 @@ namespace BloodDonationPlatform.API.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("Quantity")
-                        .HasColumnType("int");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(10);
 
-                    b.Property<int>("StatusInventory")
-                        .HasColumnType("int");
+                    b.Property<string>("StatusInventory")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -352,14 +347,10 @@ namespace BloodDonationPlatform.API.Data.Migrations
                         .IsRequired();
 
                     b.HasOne("BloodDonationPlatform.API.DataAccess.Models.BloodType", "BloodType")
-                        .WithMany()
-                        .HasForeignKey("BloodTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("BloodDonationPlatform.API.DataAccess.Models.BloodType", null)
                         .WithMany("Donors")
-                        .HasForeignKey("BloodTypeId1");
+                        .HasForeignKey("BloodTypeId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.Navigation("Area");
 
