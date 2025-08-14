@@ -15,7 +15,7 @@
   "id": 1,
   "name": "El-Helal",
   "phoneNumber": "01000000000",
-  "areaId": 1,
+  "areaId": maadi,
   "minimumBloodQuantityByLiter": "10"
 }
 ```
@@ -28,7 +28,7 @@
   "id": 1,
   "name": "El-Helal",
   "phoneNumber": "01000000000",
-  "areaId": 1,
+  "areaId": maadi,
   "minimumBloodQuantityByLiter": "10"
 }
 ```
@@ -61,14 +61,14 @@
       "id": 1,
       "name": "El-Helal",
       "phoneNumber": "01000000000",
-      "areaId": 1,
+      "areaId": maadi,
       "minimumBloodQuantityByLiter": "10"
     },
     {
       "id": 2,
       "name": "El-Salam",
       "phoneNumber": "01100000000",
-      "areaId": 2,
+      "areaId": maadi,
       "minimumBloodQuantityByLiter": "15"
     }
   ]
@@ -125,7 +125,7 @@
   "lastDonationDate": "2024-07-26",
   "gender" : "male",
   "bloodType": "A+",
-  "areaId": 1,
+  "areaId": maadi,
   "points": 150
 }
 ```
@@ -143,7 +143,7 @@
   "lastDonationDate": "2024-07-26",
   "gender" : "male",
   "bloodType": "A+",
-  "areaId": 1,
+  "areaId": maadi,
   "points": 150
 }
 ```
