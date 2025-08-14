@@ -4,10 +4,11 @@ using BloodDonationPlatform.API.DataAccess.Models;
 
 namespace BloodDonationPlatform.API.DataAccess.Repositories
 {
-    internal class HospitalRepository : BaseRepository<Hospital>, IHospitalRepository
+    internal class HospitalRepository : BaseRepository<Hospital>, IHospitalRepository 
     {
         public HospitalRepository(BloodDonationDbContext dbContext) : base(dbContext)
         {
+
         }
     }
 }

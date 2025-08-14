@@ -1,14 +1,21 @@
-
 using BloodDonationPlatform.API.DataAccess;
 using BloodDonationPlatform.API.DataAccess.DataContext;
+using BloodDonationPlatform.API.DataAccess.Interfaces;
+using BloodDonationPlatform.API.DataAccess.Repositories;
 using BloodDonationPlatform.API.Services;
+using BloodDonationPlatform.API.Services.Interfaces;
+using BloodDonationPlatform.API.Services.Profile;
+using BloodDonationPlatform.API.Services.Services;
 using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
+
+
 
 namespace BloodDonationPlatform.API
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
 
@@ -19,8 +26,21 @@ namespace BloodDonationPlatform.API
             builder.Services.AddControllers();
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
             builder.Services.AddOpenApi();
+            builder.Services.AddDbContext<BloodDonationDbContext>(options =>
+            {
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+            });
 
+            
+            builder.Services.AddScoped<IHospitalService,HospitalService>();
+
+            #region Database Initialization
+            builder.Services.AddScoped<IDbInitializer, DbInitiaLizer>();
             var app = builder.Build();
+          using  var scope = app.Services.CreateScope();
+            var dbInitializer = scope.ServiceProvider.GetRequiredService<IDbInitializer>();
+            await dbInitializer.InitializeAsync();
+            #endregion
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())

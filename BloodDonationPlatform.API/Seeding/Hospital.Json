@@ -1,0 +1,122 @@
+[
+  {
+    "Name": "Cairo General Hospital",
+    "PhoneNumber": "01012345678",
+    "AreaId": 1,
+    "CreatedById": 101,
+    "Area": {
+      "Id": 1,
+      "Name": "Zamalek"
+    },
+    "DonationRequests": [],
+    "Inventory": []
+  },
+  {
+    "Name": "Alexandria Medical Center",
+    "PhoneNumber": "01234567890",
+    "AreaId": 2,
+    "CreatedById": 102,
+    "Area": {
+      "Id": 2,
+      "Name": "Sidi Gaber"
+    },
+    "DonationRequests": [],
+    "Inventory": []
+  },
+  {
+    "Name": "Giza Heart Institute",
+    "PhoneNumber": "01198765432",
+    "AreaId": 3,
+    "CreatedById": 103,
+    "Area": {
+      "Id": 3,
+      "Name": "Dokki"
+    },
+    "DonationRequests": [],
+    "Inventory": []
+  },
+  {
+    "Name": "Mansoura Blood Center",
+    "PhoneNumber": "01099887766",
+    "AreaId": 4,
+    "CreatedById": 104,
+    "Area": {
+      "Id": 4,
+      "Name": "Talkha"
+    },
+    "DonationRequests": [],
+    "Inventory": []
+  },
+  {
+    "Name": "Tanta Emergency Hospital",
+    "PhoneNumber": "01211223344",
+    "AreaId": 5,
+    "CreatedById": 105,
+    "Area": {
+      "Id": 5,
+      "Name": "El Mehalla"
+    },
+    "DonationRequests": [],
+    "Inventory": []
+  },
+  {
+    "Name": "Aswan Regional Clinic",
+    "PhoneNumber": "01155667788",
+    "AreaId": 6,
+    "CreatedById": 106,
+    "Area": {
+      "Id": 6,
+      "Name": "Kom Ombo"
+    },
+    "DonationRequests": [],
+    "Inventory": []
+  },
+  {
+    "Name": "Fayoum Health Center",
+    "PhoneNumber": "01033445566",
+    "AreaId": 7,
+    "CreatedById": 107,
+    "Area": {
+      "Id": 7,
+      "Name": "Ibshway"
+    },
+    "DonationRequests": [],
+    "Inventory": []
+  },
+  {
+    "Name": "Ismailia Blood Bank",
+    "PhoneNumber": "01266778899",
+    "AreaId": 8,
+    "CreatedById": 108,
+    "Area": {
+      "Id": 8,
+      "Name": "Fayed"
+    },
+    "DonationRequests": [],
+    "Inventory": []
+  },
+  {
+    "Name": "Minya Medical Hub",
+    "PhoneNumber": "01122334455",
+    "AreaId": 9,
+    "CreatedById": 109,
+    "Area": {
+      "Id": 9,
+      "Name": "Mallawi"
+    },
+    "DonationRequests": [],
+    "Inventory": []
+  },
+  {
+    "Name": "Sohag Central Hospital",
+    "PhoneNumber": "01077889900",
+    "AreaId": 10,
+    "CreatedById": 110,
+    "Area": {
+      "Id": 10,
+      "Name": "Tahta"
+    },
+    "DonationRequests": [],
+    "Inventory": []
+  }
+]
