@@ -34,7 +34,7 @@ namespace BloodDonationPlatform.API
 
             #region Database Initialization
             builder.Services.AddAutoMapper(E => E.AddProfile(new HospitalProfile()));
-            builder.Services.AddScoped<IHospitalService, HospitalService>();
+            builder.Services.AddScoped<IServicesManager, ServicesManager>();
             builder.Services.AddScoped<IDbInitializer, DbInitiaLizer>();
             #endregion
             var app = builder.Build();
