@@ -7,8 +7,8 @@ namespace BloodDonationPlatform.API.Services.Interfaces
     {
         Task<IEnumerable<GetHospitalDTO>> GetAllHospitalsAsync();
         Task<GetHospitalDTO> GetHospitalByIdAsync(int id);
-        Task<GetHospitalDTO> CreateHospitalAsync(CreateHospitalDTO hospitalDto);
-        Task<GetHospitalDTO> UpdateHospitalAsync(int id, UpdateHospitalDTO hospitalDto);
+        Task<CreateHospitalDTO> CreateHospitalAsync(CreateHospitalDTO hospitalDto);
+        Task<UpdateHospitalDTO> UpdateHospitalAsync(int id, UpdateHospitalDTO hospitalDto);
         Task<bool> DeleteHospitalAsync(int id);
     }
 }

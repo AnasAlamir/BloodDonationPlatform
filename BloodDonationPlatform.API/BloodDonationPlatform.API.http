@@ -8,7 +8,7 @@ GET {{BloodDonationPlatform.API_HostAddress}}/api/hospital/
 Accept: application/json
 
 ### Get hospital by ID
-GET {{BloodDonationPlatform.API_HostAddress}}/api/hospital/20
+GET {{BloodDonationPlatform.API_HostAddress}}/api/hospital/1
 Accept: application/json
 
 ### Create a new hospital
@@ -23,7 +23,7 @@ Content-Type: application/json
 }
 
 ### Update existing hospital
-PUT {{BloodDonationPlatform.API_HostAddress}}/api/hospital/20
+PUT {{BloodDonationPlatform.API_HostAddress}}/api/hospital/1
 Content-Type: application/json
 
 {
@@ -33,5 +33,5 @@ Content-Type: application/json
 }
 
 ### Delete hospital
-DELETE {{BloodDonationPlatform.API_HostAddress}}/api/hospital/20
+DELETE {{BloodDonationPlatform.API_HostAddress}}/api/hospital/1
 Accept: application/json

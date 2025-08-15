@@ -1,17 +1,13 @@
-﻿namespace BloodDonationPlatform.API.Services.Profile;
-    using BloodDonationPlatform.API.DataAccess.Models;
-using BloodDonationPlatform.API.Services.DTOs;
-using System.Collections.Generic;
-using AutoMapper;
-
+﻿using AutoMapper;
+using BloodDonationPlatform.API.DataAccess.Models;
+using BloodDonationPlatform.API.Services.DTOs.Hospital;
 
 public class HospitalProfile : Profile
 {
-  public HospitalProfile()
-  {
-        CreateMap<Hospital, HospitalDTO>();
-        CreateMap<HospitalDTO, Hospital>();
+    public HospitalProfile()
+    {
+        CreateMap<CreateHospitalDTO, Hospital>();
+        CreateMap<Hospital, GetHospitalDTO>();
+        CreateMap<UpdateHospitalDTO, Hospital>().ReverseMap();
     }
 }
-
-

@@ -1,5 +1,6 @@
 ﻿using BloodDonationPlatform.API.Exceptions;
 using BloodDonationPlatform.API.Services.DTOs;
+using BloodDonationPlatform.API.Services.DTOs.Hospital;
 using BloodDonationPlatform.API.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -34,17 +35,17 @@ namespace BloodDonationPlatform.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] HospitalDTO dto)
+        public async Task<IActionResult> Create([FromBody] CreateHospitalDTO dto)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
             var created = await _hospitalService.CreateHospitalAsync(dto);
-            return CreatedAtAction(nameof(GetById), new { id = created.CreatedById }, created);
+            return CreatedAtAction(nameof(GetById), new { id = created.CreatedBy }, created);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, [FromBody] HospitalDTO dto)
+        public async Task<IActionResult> Update(int id, [FromBody] UpdateHospitalDTO dto)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);

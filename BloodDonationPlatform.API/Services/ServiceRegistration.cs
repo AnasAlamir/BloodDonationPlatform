@@ -1,5 +1,4 @@
 ﻿using BloodDonationPlatform.API.Services.Interfaces;
-using BloodDonationPlatform.API.Services.Profile;
 using BloodDonationPlatform.API.Services.Services;
 
 namespace BloodDonationPlatform.API.Services
