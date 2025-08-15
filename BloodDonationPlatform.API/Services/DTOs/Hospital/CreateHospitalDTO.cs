@@ -1,4 +1,4 @@
-﻿namespace BloodDonationPlatform.API.Services.DTOs
+﻿namespace BloodDonationPlatform.API.Services.DTOs.Hospital
 {
     public class CreateHospitalDTO
     {
