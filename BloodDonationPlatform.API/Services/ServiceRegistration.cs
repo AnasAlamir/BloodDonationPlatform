@@ -1,10 +1,6 @@
-﻿using BloodDonationPlatform.API.DataAccess.DataContext;
-using BloodDonationPlatform.API.DataAccess.Interfaces;
-using BloodDonationPlatform.API.DataAccess.Repositories;
-using BloodDonationPlatform.API.DataAccess.UnitOfWork;
-using BloodDonationPlatform.API.Services.Interfaces;
+﻿using BloodDonationPlatform.API.Services.Interfaces;
+using BloodDonationPlatform.API.Services.Profile;
 using BloodDonationPlatform.API.Services.Services;
-using Microsoft.EntityFrameworkCore;
 
 namespace BloodDonationPlatform.API.Services
 {
@@ -13,6 +9,8 @@ namespace BloodDonationPlatform.API.Services
         public static IServiceCollection RegisterServices(this IServiceCollection services)
         {
             services.AddScoped<IDonorService, DonorService>();
+            services.AddScoped<IHospitalService, HospitalService>();
+            services.AddAutoMapper(cfg => cfg.AddProfile<HospitalProfile>(), typeof(HospitalProfile));
             return services;
         }
     }

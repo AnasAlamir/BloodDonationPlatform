@@ -26,18 +26,24 @@ namespace BloodDonationPlatform.API
             builder.Services.AddControllers();
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
             builder.Services.AddOpenApi();
-            builder.Services.AddDbContext<BloodDonationDbContext>(options =>
-            {
-                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
-            });
+            //builder.Services.AddDbContext<BloodDonationDbContext>(options =>
+            //{
+            //    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+            //});
 
             
-            builder.Services.AddScoped<IHospitalService,HospitalService>();
+            //builder.Services.AddScoped<IHospitalService,HospitalService>();
 
             #region Database Initialization
-            builder.Services.AddScoped<IDbInitializer, DbInitiaLizer>();
+            //builder.Services.AddScoped<IDbInitializer, DbInitiaLizer>();
+
+
+
             var app = builder.Build();
-          using  var scope = app.Services.CreateScope();
+
+
+
+            using  var scope = app.Services.CreateScope();
             var dbInitializer = scope.ServiceProvider.GetRequiredService<IDbInitializer>();
             await dbInitializer.InitializeAsync();
             #endregion

@@ -19,7 +19,7 @@
                    .HasForeignKey(id => id.HospitalId)
                    .OnDelete(DeleteBehavior.Cascade);
 
-            builder.Property(i => i.Quantity)
+            builder.Property(i => i.CurrentQuantity)
                    .IsRequired()
                    .HasDefaultValue(10);
 

@@ -3,4 +3,35 @@
 GET {{BloodDonationPlatform.API_HostAddress}}/api/donor/
 Accept: application/json
 
-###
+### Get all hospitals
+GET {{BloodDonationPlatform.API_HostAddress}}/api/hospital/
+Accept: application/json
+
+### Get hospital by ID
+GET {{BloodDonationPlatform.API_HostAddress}}/api/hospital/20
+Accept: application/json
+
+### Create a new hospital
+POST {{BloodDonationPlatform.API_HostAddress}}/api/hospital/
+Content-Type: application/json
+
+{
+  "name": "City General Hospital",
+  "areaId": 3,
+  "phoneNumber": "555-123-4567",
+  "createdById": 102
+}
+
+### Update existing hospital
+PUT {{BloodDonationPlatform.API_HostAddress}}/api/hospital/20
+Content-Type: application/json
+
+{
+  "name": "City General Hospital Updated",
+  "phoneNumber": "01200000000",
+  "areaId": 5
+}
+
+### Delete hospital
+DELETE {{BloodDonationPlatform.API_HostAddress}}/api/hospital/20
+Accept: application/json
