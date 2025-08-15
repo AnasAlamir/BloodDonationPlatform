@@ -7,39 +7,36 @@ namespace BloodDonationPlatform.API.DataAccess.Repositories
     internal class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : class
     {
         private readonly BloodDonationDbContext _dbContext;
-        private readonly DbSet<TEntity> _entitiy;
+        private readonly DbSet<TEntity> _entity;
         public BaseRepository(BloodDonationDbContext dbContext) 
         {
             _dbContext = dbContext;
-            _entitiy = _dbContext.Set<TEntity>();
+            _entity = _dbContext.Set<TEntity>();
         }
-        public void Delete(int id)
+        public async Task DeleteAsync(int id)
         {
-            var entity = _entitiy.Find(id);
+            var entity = await _entity.FindAsync(id);
             if (entity != null)
             {
-                _entitiy.Remove(entity);
+                _entity.Remove(entity);
             }
         }
-
-        public IEnumerable<TEntity> GetAll()
+        public async Task<IEnumerable<TEntity>> GetAllAsync()
         {
-            return _entitiy.AsEnumerable();
+            return await _entity.ToListAsync();
         }
-
-        public TEntity? GetById(int id)
+        public async Task<TEntity?> GetByIdAsync(int id)
         {
-            return _entitiy.Find(id);
+            return await _entity.FindAsync(id);
         }
-
-        public void Insert(TEntity entity)
+        public async Task InsertAsync(TEntity entity)
         {
-            _entitiy.Add(entity);
+            await _entity.AddAsync(entity);
         }
-
         public void Update(TEntity entity)
         {
-            _entitiy.Update(entity);
+            _entity.Update(entity);        
         }
+
     }
 }
