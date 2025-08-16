@@ -1,11 +1,12 @@
 ﻿using Azure.Core;
 using BloodDonationPlatform.API.DataAccess.Models;
+using BloodDonationPlatform.API.Services.DTOs.DonationRequest;
 
 namespace BloodDonationPlatform.API.Services.Interfaces
 {
     public interface IDonationRequestService
     {
-        int GetOpendDonationRequestsNumber();
-        int GetPendingDonationRequestsNumber();
+        Task<IEnumerable<GetDonationRequestDTO>> GetAllAsync();
+        Task<GetDonationRequestDTO> CreateAsync(CreateDonationRequestDTO dto);
     }
 }

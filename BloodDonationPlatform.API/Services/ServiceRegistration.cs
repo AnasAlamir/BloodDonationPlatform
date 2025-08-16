@@ -8,7 +8,7 @@ namespace BloodDonationPlatform.API.Services
     {
         public static IServiceCollection RegisterServices(this IServiceCollection services)
         {
-            services.AddScoped<IDonorService, DonorService>();
+            //services.AddScoped<IDonorService, DonorService>();
             services.AddScoped<IHospitalService, HospitalService>();
             services.AddAutoMapper(cfg => cfg.AddProfile<HospitalProfile>(), typeof(HospitalProfile));
             return services;
