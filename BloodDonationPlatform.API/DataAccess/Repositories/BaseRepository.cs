@@ -6,40 +6,37 @@ namespace BloodDonationPlatform.API.DataAccess.Repositories
 {
     internal class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : class
     {
-        private readonly BloodDonationDbContext _dbContext;
-        private readonly DbSet<TEntity> _entitiy;
+        protected readonly BloodDonationDbContext _dbContext;
+        protected readonly DbSet<TEntity> _entity;
         public BaseRepository(BloodDonationDbContext dbContext) 
         {
             _dbContext = dbContext;
-            _entitiy = _dbContext.Set<TEntity>();
+            _entity = _dbContext.Set<TEntity>();
         }
-        public void Delete(int id)
+        public virtual async Task DeleteAsync(int id)
         {
-            var entity = _entitiy.Find(id);
+            var entity = await _entity.FindAsync(id);
             if (entity != null)
             {
-                _entitiy.Remove(entity);
+                _entity.Remove(entity);
             }
         }
-
-        public IEnumerable<TEntity> GetAll()
+        public virtual async Task<IEnumerable<TEntity>> GetAllAsync()
         {
-            return _entitiy.AsEnumerable();
+            return await _entity.ToListAsync();
+        }
+        public virtual async Task<TEntity?> GetByIdAsync(int id)
+        {
+            return await _entity.FindAsync(id);
+        }
+        public virtual async Task InsertAsync(TEntity entity)
+        {
+            await _entity.AddAsync(entity);
+        }
+        public virtual void Update(TEntity entity)
+        {
+            _entity.Update(entity);        
         }
 
-        public TEntity? GetById(int id)
-        {
-            return _entitiy.Find(id);
-        }
-
-        public void Insert(TEntity entity)
-        {
-            _entitiy.Add(entity);
-        }
-
-        public void Update(TEntity entity)
-        {
-            _entitiy.Update(entity);
-        }
     }
 }

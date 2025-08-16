@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 namespace BloodDonationPlatform.API.DataAccess.DataContext
 {
-    internal class BloodDonationDbContext : DbContext
+    public class BloodDonationDbContext : DbContext
     {
         public BloodDonationDbContext(DbContextOptions<BloodDonationDbContext> options) : base(options)
         {
