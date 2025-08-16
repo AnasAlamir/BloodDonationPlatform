@@ -4,7 +4,7 @@ namespace BloodDonationPlatform.API.DataAccess.Interfaces
 {
     public interface IBloodTypeRepository
     {
-        IEnumerable<BloodType> GetAll();
-        BloodType? GetById(int id);
+        Task<BloodType?> GetByIdAsync(int id);
+        Task<IEnumerable<BloodType>> GetAllAsync();
     }
 }

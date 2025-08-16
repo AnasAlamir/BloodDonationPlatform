@@ -17,6 +17,16 @@ namespace BloodDonationPlatform.API
         public static async Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+            // Add CORS policy
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAll", policy =>
+                {
+                    policy.AllowAnyOrigin()       // or .WithOrigins("https://yourflutterapp.com")
+                          .AllowAnyMethod()
+                          .AllowAnyHeader();
+                });
+            });
 
             // Add services to the container.
             builder.Services.RegisterDataAccess(builder.Configuration);
@@ -24,23 +34,10 @@ namespace BloodDonationPlatform.API
 
             builder.Services.AddControllers();
             builder.Services.AddOpenApi();
-            //builder.Services.AddDbContext<BloodDonationDbContext>(options =>
-            //{
-            //    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
-            //});
 
-
-            //builder.Services.AddScoped<IHospitalService,HospitalService>();
-
-            #region Database Initialization
-            //builder.Services.AddAutoMapper(E => E.AddProfile(new HospitalProfile()));
-            //builder.Services.AddScoped<IServicesManager, ServicesManager>();
-            //builder.Services.AddScoped<IDbInitializer, DbInitiaLizer>();
-            #endregion
             var app = builder.Build();
-            //using  var scope = app.Services.CreateScope();
-            //var dbInitializer = scope.ServiceProvider.GetRequiredService<IDbInitializer>();
-            //await dbInitializer.InitializeAsync();
+
+            app.UseCors("AllowAll");
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
