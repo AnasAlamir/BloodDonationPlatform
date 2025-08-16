@@ -10,7 +10,9 @@ namespace BloodDonationPlatform.API.Services
         {
             //services.AddScoped<IDonorService, DonorService>();
             services.AddScoped<IHospitalService, HospitalService>();
+            services.AddScoped<IDonationRequestService, DonationRequestService>();
             services.AddAutoMapper(cfg => cfg.AddProfile<HospitalProfile>(), typeof(HospitalProfile));
+            services.AddAutoMapper(cfg => cfg.AddProfile<DonationRequestProfile>(), typeof(DonationRequestProfile));
             return services;
         }
     }

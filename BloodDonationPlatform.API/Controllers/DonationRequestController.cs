@@ -15,22 +15,29 @@ namespace BloodDonationPlatform.API.Controllers
         {
             _donationRequestService = donationRequestService;
         }
-
-        // GET: api/DonationRequest
-        [HttpGet]
-        public async Task<IActionResult> GetAll()
+        [HttpGet("hospital/active/{hospitalId}")]
+        public async Task<IActionResult> GetAllActiveByHospitalId(int hospitalId)
         {
-            var requests = await _donationRequestService.GetAllAsync();
+            var requests = await _donationRequestService.GetAllActiveByHospitalIdAsync(hospitalId);
             return Ok(requests);
         }
-
-        // GET: api/DonationRequest/{id}
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(int id)
+        [HttpGet("hospital/completed/{hospitalId}")]
+        public async Task<IActionResult> GetAllCompletedByHospitalId(int hospitalId)
         {
-            var request = await _donationRequestService.GetByIdAsync(id);
-            if (request == null) return NotFound();
-            return Ok(request);
+            var requests = await _donationRequestService.GetAllCompletedByHospitalIdAsync(hospitalId);
+            return Ok(requests);
+        }
+        [HttpGet("hospital/open-requests/{hospitalId}")]
+        public async Task<IActionResult> GetOpenRequestsCountByHospitalId(int hospitalId)
+        {
+            var count = await _donationRequestService.GetOpenRequestsCountByHospitalIdAsync(hospitalId);
+            return Ok(count);
+        }
+        [HttpGet("hospital/pending-requests/{hospitalId}")]
+        public async Task<IActionResult> GetPendingRequestsCountByHospitalId(int hospitalId)
+        {
+            var count = await _donationRequestService.GetPendingRequestsCountByHospitalIdAsync(hospitalId);
+            return Ok(count);
         }
 
         // POST: api/DonationRequest
@@ -40,16 +47,25 @@ namespace BloodDonationPlatform.API.Controllers
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
             var created = await _donationRequestService.CreateAsync(dto);
-            return CreatedAtAction(nameof(GetById), new { id = created.Id }, created);
+            return Ok(created);
+            //return CreatedAtAction(nameof(GetById), new { id = created.Id }, created);
         }
 
-        // PUT: api/DonationRequest/status
-        [HttpPut("status")]
-        public async Task<IActionResult> UpdateStatus([FromBody] UpdateDonationRequestStatusDTO dto)
-        {
-            var updated = await _donationRequestService.UpdateStatusAsync(dto);
-            if (!updated) return NotFound();
-            return NoContent();
-        }
+        //// PUT: api/DonationRequest/status
+        //[HttpPut("status")]
+        //public async Task<IActionResult> UpdateStatus([FromBody] UpdateDonationRequestStatusDTO dto)
+        //{
+        //    var updated = await _donationRequestService.UpdateStatusAsync(dto);
+        //    if (!updated) return NotFound();
+        //    return NoContent();
+        //}
+        //// GET: api/DonationRequest/{id}
+        //[HttpGet("{id}")]
+        //public async Task<IActionResult> GetById(int id)
+        //{
+        //    var request = await _donationRequestService.GetByIdAsync(id);
+        //    if (request == null) return NotFound();
+        //    return Ok(request);
+        //}
     }
 }

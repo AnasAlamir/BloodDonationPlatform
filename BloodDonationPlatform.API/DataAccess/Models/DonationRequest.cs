@@ -3,7 +3,7 @@
     public class DonationRequest : BaseEntity
     {
 
-        public DateTime CreatedAt { get; set; }
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         public int HospitalId { get; set; }
         public int BloodTypeId { get; set; }
         public decimal NumOfLiter { get; set; }

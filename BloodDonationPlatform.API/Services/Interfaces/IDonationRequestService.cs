@@ -6,11 +6,12 @@ namespace BloodDonationPlatform.API.Services.Interfaces
 {
     public interface IDonationRequestService
     {
-        Task<IEnumerable<GetHospitalDonationRequestDTO>> GetAllActiveAsync();
-        Task<IEnumerable<GetHospitalDonationRequestDTO>> GetAllCompletedAsync();
+        Task<IEnumerable<GetHospitalDonationRequestDTO>> GetAllActiveByHospitalIdAsync(int hospitalId);
+        Task<IEnumerable<GetHospitalDonationRequestDTO>> GetAllCompletedByHospitalIdAsync(int hospitalId);
         Task<GetHospitalDonationRequestDTO> CreateAsync(CreateDonationRequestDTO dto);
-        Task<int> GetOpenRequestsCountAsync();
-        Task<int> GetPendingRequestsCountAsync();
+        Task<int> GetOpenRequestsCountByHospitalIdAsync(int hospitalId);
+        Task<int> GetPendingRequestsCountByHospitalIdAsync(int hospitalId);
+
         //Task<GetDonationRequestDTO?> GetByIdAsync(int id);
         //Task<bool> UpdateStatusAsync(UpdateDonationRequestStatusDTO dto);
     }
