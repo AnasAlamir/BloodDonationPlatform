@@ -4,6 +4,10 @@
 GET {{BloodDonationPlatform.API_HostAddress}}/api/hospital/
 Accept: application/json
 
+### Get all hospitals by-name
+GET {{BloodDonationPlatform.API_HostAddress}}/api/hospital/get-all-by-name
+Accept: application/json
+
 ### Get hospital by ID
 GET {{BloodDonationPlatform.API_HostAddress}}/api/hospital/43
 Accept: application/json

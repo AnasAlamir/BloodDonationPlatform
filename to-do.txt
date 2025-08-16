@@ -5,3 +5,4 @@
 - seed city data 
 -create relationship between area and city (put fk from city to area)
 - no action with area and city
+

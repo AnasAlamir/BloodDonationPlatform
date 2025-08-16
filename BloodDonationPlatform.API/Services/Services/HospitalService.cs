@@ -36,6 +36,11 @@ namespace BloodDonationPlatform.API.Services.Services
             var hospitals = await _unitOfWork.HospitalRepository.GetAllAsync();
             return _mapper.Map<IEnumerable<GetHospitalDTO>>(hospitals);
         }
+        public async Task<IEnumerable<GetNameHospitalDTO>> GetAllNameHospitalsAsync()
+        {
+            var hospitals = await _unitOfWork.HospitalRepository.GetAllAsync();
+            return hospitals.Select(h => new GetNameHospitalDTO { Id = h.Id, Name = h.Name});
+        }
         public async Task<GetHospitalDTO> CreateHospitalAsync(CreateHospitalDTO hospitalDto)
         {
             var hospital = _mapper.Map<Hospital>(hospitalDto);
