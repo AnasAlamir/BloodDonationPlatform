@@ -32,6 +32,12 @@ namespace BloodDonationPlatform.API.Services.Services
             });
             return Result;
         }
+        /// <summary>
+        /// ghgj
+        /// </summary>
+        /// <param name="quantity"></param>
+        /// <param name="expiration"></param>
+        /// <returns></returns>
 
         private StatusInventory GetStatus(int quantity, DateTime expiration)
         {
