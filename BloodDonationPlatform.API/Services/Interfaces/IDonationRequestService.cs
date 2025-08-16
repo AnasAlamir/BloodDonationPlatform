@@ -8,5 +8,7 @@ namespace BloodDonationPlatform.API.Services.Interfaces
     {
         Task<IEnumerable<GetDonationRequestDTO>> GetAllAsync();
         Task<GetDonationRequestDTO> CreateAsync(CreateDonationRequestDTO dto);
+        Task<GetDonationRequestDTO> GetByIdAsync(int id);
+        Task<bool> UpdateStatusAsync(UpdateDonationRequestStatusDTO dto);
     }
 }
