@@ -1,82 +1,82 @@
-[
-  {
-    "Name": "Cairo General Hospital",
-    "PhoneNumber": "01012345678",
-    "AreaId": 1,
-    "CreatedById": 101,
-    "DonationRequests": [],
-    "Inventory": []
-  },
-  {
-    "Name": "Alexandria Medical Center",
-    "PhoneNumber": "01234567890",
-    "AreaId": 2,
-    "CreatedById": 102,
-    "DonationRequests": [],
-    "Inventory": []
-  },
-  {
-    "Name": "Giza Heart Institute",
-    "PhoneNumber": "01198765432",
-    "AreaId": 3,
-    "CreatedById": 103,
-    "DonationRequests": [],
-    "Inventory": []
-  },
-  {
-    "Name": "Mansoura Blood Center",
-    "PhoneNumber": "01099887766",
-    "AreaId": 4,
-    "CreatedById": 104,
-    "DonationRequests": [],
-    "Inventory": []
-  },
-  {
-    "Name": "Tanta Emergency Hospital",
-    "PhoneNumber": "01211223344",
-    "AreaId": 5,
-    "CreatedById": 105,
-    "DonationRequests": [],
-    "Inventory": []
-  },
-  {
-    "Name": "Aswan Regional Clinic",
-    "PhoneNumber": "01155667788",
-    "AreaId": 1,
-    "CreatedById": 106,
-    "DonationRequests": [],
-    "Inventory": []
-  },
-  {
-    "Name": "Fayoum Health Center",
-    "PhoneNumber": "01033445566",
-    "AreaId": 2,
-    "CreatedById": 107,
-    "DonationRequests": [],
-    "Inventory": []
-  },
-  {
-    "Name": "Ismailia Blood Bank",
-    "PhoneNumber": "01266778899",
-    "AreaId": 3,
-    "CreatedById": 108,
-    "DonationRequests": [],
-    "Inventory": []
-  },
-  {
-    "Name": "Minya Medical Hub",
-    "PhoneNumber": "01122334455",
-    "AreaId": 4,
-    "CreatedById": 109,
-    "DonationRequests": [],
-    "Inventory": []
-  },
-  {
-    "Name": "Sohag Central Hospital",
-    "PhoneNumber": "01077889900",
-    "AreaId": 5,
-    "CreatedById": 110,
-    "DonationRequests": [],
-    "Inventory": []
-  }
-]
+//[
+//  {
+//    "Name": "Cairo General Hospital",
+//    "PhoneNumber": "01012345678",
+//    "AreaId": 1,
+//    "CreatedById": 101,
+//    "DonationRequests": [],
+//    "Inventory": []
+//  },
+//  {
+//    "Name": "Alexandria Medical Center",
+//    "PhoneNumber": "01234567890",
+//    "AreaId": 2,
+//    "CreatedById": 102,
+//    "DonationRequests": [],
+//    "Inventory": []
+//  },
+//  {
+//    "Name": "Giza Heart Institute",
+//    "PhoneNumber": "01198765432",
+//    "AreaId": 3,
+//    "CreatedById": 103,
+//    "DonationRequests": [],
+//    "Inventory": []
+//  },
+//  {
+//    "Name": "Mansoura Blood Center",
+//    "PhoneNumber": "01099887766",
+//    "AreaId": 4,
+//    "CreatedById": 104,
+//    "DonationRequests": [],
+//    "Inventory": []
+//  },
+//  {
+//    "Name": "Tanta Emergency Hospital",
+//    "PhoneNumber": "01211223344",
+//    "AreaId": 5,
+//    "CreatedById": 105,
+//    "DonationRequests": [],
+//    "Inventory": []
+//  },
+//  {
+//    "Name": "Aswan Regional Clinic",
+//    "PhoneNumber": "01155667788",
+//    "AreaId": 1,
+//    "CreatedById": 106,
+//    "DonationRequests": [],
+//    "Inventory": []
+//  },
+//  {
+//    "Name": "Fayoum Health Center",
+//    "PhoneNumber": "01033445566",
+//    "AreaId": 2,
+//    "CreatedById": 107,
+//    "DonationRequests": [],
+//    "Inventory": []
+//  },
+//  {
+//    "Name": "Ismailia Blood Bank",
+//    "PhoneNumber": "01266778899",
+//    "AreaId": 3,
+//    "CreatedById": 108,
+//    "DonationRequests": [],
+//    "Inventory": []
+//  },
+//  {
+//    "Name": "Minya Medical Hub",
+//    "PhoneNumber": "01122334455",
+//    "AreaId": 4,
+//    "CreatedById": 109,
+//    "DonationRequests": [],
+//    "Inventory": []
+//  },
+//  {
+//    "Name": "Sohag Central Hospital",
+//    "PhoneNumber": "01077889900",
+//    "AreaId": 5,
+//    "CreatedById": 110,
+//    "DonationRequests": [],
+//    "Inventory": []
+//  }
+//]
