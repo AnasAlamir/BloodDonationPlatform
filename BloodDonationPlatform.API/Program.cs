@@ -38,9 +38,9 @@ namespace BloodDonationPlatform.API
             //builder.Services.AddScoped<IDbInitializer, DbInitiaLizer>();
             #endregion
             var app = builder.Build();
-            using  var scope = app.Services.CreateScope();
-            var dbInitializer = scope.ServiceProvider.GetRequiredService<IDbInitializer>();
-            await dbInitializer.InitializeAsync();
+            //using  var scope = app.Services.CreateScope();
+            //var dbInitializer = scope.ServiceProvider.GetRequiredService<IDbInitializer>();
+            //await dbInitializer.InitializeAsync();
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
