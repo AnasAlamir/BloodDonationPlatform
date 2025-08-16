@@ -74,7 +74,7 @@
   ]
 }
 ```
-### POST /api/hospital/add-hospital
+### POST /api/hospital/
 >[Authorize(Roles = "Admin")] 
 > add new hospital in the system
 **Request:**
