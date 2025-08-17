@@ -48,7 +48,7 @@ namespace BloodDonationPlatform.API.Controllers
 
             var created = await _donationRequestService.CreateAsync(dto);
             return Ok(created);
-            //return CreatedAtAction(nameof(GetById), new { id = created.Id }, created);
+            //return CreatedAtAction(nameof(GetById), new { id = created.AreaId }, created);
         }
 
         //// PUT: api/DonationRequest/status

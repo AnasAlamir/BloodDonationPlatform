@@ -31,7 +31,7 @@ namespace BloodDonationPlatform.API.Services.Services
         //    var donationRequest = _mapper.Map<DonationRequest>(dto);
         //    await _unitOfWork.DonationRequestRepository.InsertAsync(donationRequest);
         //    await _unitOfWork.SaveAsync();
-        //    var createdDonationRequest = await _unitOfWork.DonationRequestRepository.GetByIdAsync(donationRequest.Id);
+        //    var createdDonationRequest = await _unitOfWork.DonationRequestRepository.GetByIdAsync(donationRequest.AreaId);
         //    if (createdDonationRequest == null)
         //        throw new InvalidOperationException();
 
