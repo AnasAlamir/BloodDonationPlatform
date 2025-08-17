@@ -9,5 +9,9 @@ namespace BloodDonationPlatform.API.DataAccess.Repositories
         public InventoryRepository(BloodDonationDbContext dbContext) : base(dbContext)
         {
         }
+        public async Task InsertRangeAsync(IEnumerable<Inventory> inventories)
+        {
+            await _entity.AddRangeAsync(inventories);
+        }
     }
 }

@@ -51,9 +51,9 @@ namespace BloodDonationPlatform.API.DataAccess.UnitOfWork
         public IAreaRepository AreaRepository => _areaRepository;
         public ICityRepository CityRepository => _cityRepository;
 
-        public void Save()
+        public async Task SaveAsync()
         {
-            _dbContext.SaveChanges();
+            await _dbContext.SaveChangesAsync();
         }
     }
 }

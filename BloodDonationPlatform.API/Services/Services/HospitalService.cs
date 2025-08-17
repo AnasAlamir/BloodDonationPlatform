@@ -1,83 +1,107 @@
 ﻿using AutoMapper;
-using BloodDonationPlatform.API.DataAccess.DataContext;
 using BloodDonationPlatform.API.DataAccess.Interfaces;
 using BloodDonationPlatform.API.DataAccess.Models;
-using BloodDonationPlatform.API.DataAccess.Repositories;
 using BloodDonationPlatform.API.Exceptions;
-using BloodDonationPlatform.API.Services.DTOs;
 using BloodDonationPlatform.API.Services.DTOs.Hospital;
 using BloodDonationPlatform.API.Services.Interfaces;
-using Microsoft.EntityFrameworkCore;
-using System.Net;
-
 namespace BloodDonationPlatform.API.Services.Services
 {
-
     public class HospitalService : IHospitalService
     {
-        private readonly BloodDonationDbContext _context;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
-
-        public HospitalService(BloodDonationDbContext context, IMapper mapper)
+        public HospitalService(IUnitOfWork unitOfWork, IMapper mapper)
         {
-            _context = context;
+            _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
-
-        public async Task<CreateHospitalDTO> CreateHospitalAsync(CreateHospitalDTO hospitalDto)
+        public async Task<bool> DeleteHospitalAsync(int id)///already DELETE INVENTORY as its cascade
         {
-            var hospital = _mapper.Map<Hospital>(hospitalDto);
-
-            _context.Hospitals.Add(hospital);
-            await _context.SaveChangesAsync();
-            return hospitalDto;
-        }
-
-        public async Task<bool> DeleteHospitalAsync(int id)
-        {
-            var hospital = await _context.Hospitals.FindAsync(id);
+            var hospital = await _unitOfWork.HospitalRepository.GetByIdAsync(id);
             if (hospital == null) throw new HospitalNotFoundExceptions(id);
 
-            _context.Hospitals.Remove(hospital);
-            await _context.SaveChangesAsync();
+            await _unitOfWork.HospitalRepository.DeleteAsync(id);
+            await _unitOfWork.SaveAsync();
             return true;
         }
-
-
+        public async Task<GetHospitalDTO?> GetHospitalByIdAsync(int id)
+        {
+            var hospital = await _unitOfWork.HospitalRepository.GetByIdWithAreaInventoryIncludedAsync(id);
+            if (hospital == null)
+                return null;
+            return _mapper.Map<GetHospitalDTO>(hospital);
+        }
         public async Task<IEnumerable<GetHospitalDTO>> GetAllHospitalsAsync()
         {
-            var hospitals = await _context.Hospitals.ToListAsync();
-            var Result = _mapper.Map<IEnumerable<GetHospitalDTO>>(hospitals);
-            return Result;
+            var hospitals = await _unitOfWork.HospitalRepository.GetAllAsync();
+            return _mapper.Map<IEnumerable<GetHospitalDTO>>(hospitals);
         }
-
-        public async Task<GetHospitalDTO> GetHospitalByIdAsync(int id)
+        public async Task<IEnumerable<GetNameHospitalDTO>> GetAllNameHospitalsAsync()
         {
-            var hospital = await _context.Hospitals.FindAsync(id);
-            return hospital == null ? null : _mapper.Map<GetHospitalDTO>(hospital);
+            var hospitals = await _unitOfWork.HospitalRepository.GetAllAsync();
+            return hospitals.Select(h => new GetNameHospitalDTO { Id = h.Id, Name = h.Name});
         }
-
-        public async Task<UpdateHospitalDTO> UpdateHospitalAsync(int id, UpdateHospitalDTO hospitalDto)
+        public async Task<GetHospitalDTO> CreateHospitalAsync(CreateHospitalDTO hospitalDto)
         {
-            var hospital = await _context.Hospitals.FindAsync(id);
-            if (hospital == null)
-                throw new HospitalcreateOrUpdateBadRequestException();
+            var hospital = _mapper.Map<Hospital>(hospitalDto);
+            var inventories = Enumerable.Range(1, 8)
+                .Select(i => new Inventory
+                {
+                    BloodTypeId = i,
+                    MinimunQuantity = hospitalDto.MinimumBloodQuantityByLiter,
+                    CurrentQuantity = hospitalDto.MinimumBloodQuantityByLiter,
+                    Hospital = hospital // navigation property
+                })
+                .ToList();
 
-            var updatedHospital = _mapper.Map(hospitalDto, hospital);
-            await _context.SaveChangesAsync();
-            var reslut = _mapper.Map<UpdateHospitalDTO>(updatedHospital);
-            return reslut;
+            await _unitOfWork.HospitalRepository.InsertAsync(hospital);
+            await _unitOfWork.InventoryRepository.InsertRangeAsync(inventories);
+            await _unitOfWork.SaveAsync();
 
+            // Reload with Area + Inventory for mapping
+            var createdHospital = await _unitOfWork.HospitalRepository.GetByIdWithAreaInventoryIncludedAsync(hospital.Id);
+            if (createdHospital == null)
+                throw new InvalidOperationException();
+
+            return _mapper.Map<GetHospitalDTO>(createdHospital);
         }
+        //public async Task<GetHospitalDTO?> UpdateHospitalAsync(int id, UpdateHospitalDTO hospitalDto)
+        //{
+        //    var hospital = await _unitOfWork.HospitalRepository.GetByIdWithAreaInventoryIncludedAsync(id);
+        //    if (hospital == null) throw new HospitalcreateOrUpdateBadRequestException();
 
+        //    // AutoMapper will now also update inventories
+        //    _mapper.Map(hospitalDto, hospital);
+
+        //    await _unitOfWork.SaveAsync();
+
+        //    // Reload to ensure Area + Inventory navigation properties are populated
+        //    var updated = await _unitOfWork.HospitalRepository.GetByIdWithAreaInventoryIncludedAsync(id);
+
+        //    return _mapper.Map<GetHospitalDTO>(updated);
+
+        //    //var hospital = await _unitOfWork.HospitalRepository.GetByIdWithAreaInventoryIncludedAsync(id);
+        //    //if (hospital == null) throw new HospitalcreateOrUpdateBadRequestException();
+
+        //    //var updatedHospital = _mapper.Map(hospitalDto, hospital);
+        //    //await _unitOfWork.SaveAsync();
+
+        //    //return _mapper.Map<GetHospitalDTO>(updatedHospital);
+        //}
+        public async Task<GetHospitalDTO?> UpdateHospitalAsync(int id, UpdateHospitalDTO dto)
+        {
+            var hospital = await _unitOfWork.HospitalRepository
+                .GetByIdWithAreaInventoryIncludedAsync(id);
+            if (hospital == null) throw new HospitalcreateOrUpdateBadRequestException();
+
+            _mapper.Map(dto, hospital);         // mutates scalars + child items (AfterMap)
+            await _unitOfWork.SaveAsync();      // single save
+
+            // Reload so Area/Inventory navigations are populated for mapping
+            var updated = await _unitOfWork.HospitalRepository
+                .GetByIdWithAreaInventoryIncludedAsync(id);
+
+            return _mapper.Map<GetHospitalDTO>(updated);
+        }
     }
 }
-
-    
-
-
-
-
-
-
-

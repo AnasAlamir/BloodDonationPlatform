@@ -16,14 +16,16 @@ namespace BloodDonationPlatform.API.DataAccess.Repositories
             _dbContext = _context.Set<Area>();
         }
 
-        public IEnumerable<Area> GetAll()
+        public async Task<IEnumerable<Area>> GetAllAsync()
         {
-            return _dbContext.AsEnumerable();
+            return await _dbContext.Include(a => a.City).ToListAsync();
         }
 
-        public Area? GetById(int id)
+        public async Task<Area?> GetByIdAsync(int id)
         {
-            return _dbContext.Find(id);
+            return await _dbContext
+                .Include(a => a.City)
+                .FirstOrDefaultAsync(a => a.Id == id);
         }
     }
 }

@@ -1,9 +1,7 @@
 ﻿using BloodDonationPlatform.API.Exceptions;
-using BloodDonationPlatform.API.Services.DTOs;
 using BloodDonationPlatform.API.Services.DTOs.Hospital;
 using BloodDonationPlatform.API.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-
 namespace BloodDonationPlatform.API.Controllers
 {
     [ApiController]
@@ -21,6 +19,12 @@ namespace BloodDonationPlatform.API.Controllers
         public async Task<IActionResult> GetAll()
         {
             var hospitals = await _hospitalService.GetAllHospitalsAsync();
+            return Ok(hospitals);
+        }
+        [HttpGet("get-all-by-name")]
+        public async Task<IActionResult> GetAllWithName()
+        {
+            var hospitals = await _hospitalService.GetAllNameHospitalsAsync();
             return Ok(hospitals);
         }
 
@@ -41,7 +45,8 @@ namespace BloodDonationPlatform.API.Controllers
                 return BadRequest(ModelState);
 
             var created = await _hospitalService.CreateHospitalAsync(dto);
-            return CreatedAtAction(nameof(GetById), new { id = created.CreatedBy }, created);
+            return Ok(created);
+            //return CreatedAtAction(nameof(GetById), new { id = created.CreatedBy }, created);
         }
 
         [HttpPut("{id}")]

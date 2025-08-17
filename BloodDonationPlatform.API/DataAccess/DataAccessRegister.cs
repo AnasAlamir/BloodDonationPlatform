@@ -21,7 +21,7 @@ namespace BloodDonationPlatform.API.DataAccess
             services.AddScoped<ICityRepository, CityRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork.UnitOfWork>();
 
-            services.AddScoped<IDbInitializer, DbInitiaLizer>();
+            //services.AddScoped<IDbInitializer, DbInitiaLizer>();
 
             // Add DbContext to dependency injection
             services.AddDbContext<BloodDonationDbContext>(options =>
