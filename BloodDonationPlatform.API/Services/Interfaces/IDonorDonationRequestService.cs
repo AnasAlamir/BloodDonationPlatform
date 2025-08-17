@@ -1,14 +1,15 @@
-﻿using BloodDonationPlatform.API.Services.DTOs.DonorDonationRequest;
+﻿//using BloodDonationPlatform.API.Services.DTOs.DonationRequest;
+//using BloodDonationPlatform.API.Services.DTOs.DonorDonationRequest;
 
-namespace BloodDonationPlatform.API.Services.Interfaces
-{
-    public interface IDonorDonationRequestService
-    {
-        Task<IEnumerable<GetDonorDonationRequestDTO>> GetAllAsync();
-        //Task<bool> DeleteAsync(int id);
-        Task<CreateDonorDonationRequestDTO> CreateAsync(CreateDonorDonationRequestDTO dto);
-        Task<bool> UpdateStatusAsync(UpdateDonorDonationRequestStatusDTO dto);
-        Task<GetDonorDonationRequestDTO> GetByIdAsync(int id);
-        Task AutoAssignEligibleDonorsAsync(int donationRequestId);
-    }
-}
+//namespace BloodDonationPlatform.API.Services.Interfaces
+//{
+//    public interface IDonorDonationRequestService
+//    {
+//        Task<GetHospitalDonationRequestDTO> CreateAsync(CreateDonationRequestDTO dto);
+//        Task<IEnumerable<GetHospitalDonationRequestDTO>> GetAllActiveByHospitalIdAsync(int hospitalId);
+//        Task<IEnumerable<GetHospitalDonationRequestDTO>> GetAllCompletedByHospitalIdAsync(int hospitalId);
+//        Task<int> GetOpenRequestsCountByHospitalIdAsync(int hospitalId);
+//        Task<int> GetPendingRequestsCountByHospitalIdAsync(int hospitalId);
+//    }
+//}
+

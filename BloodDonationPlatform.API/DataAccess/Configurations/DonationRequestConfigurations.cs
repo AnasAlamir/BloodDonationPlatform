@@ -22,9 +22,6 @@ public class DonationRequestConfigurations : IEntityTypeConfiguration<DonationRe
                .HasForeignKey(ddr => ddr.DonationRequestId) 
                .OnDelete(DeleteBehavior.Cascade);
 
-        builder.Property(d => d.NumOfLiter)
-            .HasPrecision(10, 2);
-
         builder.Property(o => o.StatesRequest)
                .HasConversion(s => s.ToString(), s => Enum.Parse<StatesRequest>(s));
     }
