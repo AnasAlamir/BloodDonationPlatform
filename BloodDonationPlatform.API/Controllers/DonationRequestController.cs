@@ -63,7 +63,7 @@ namespace BloodDonationPlatform.API.Controllers
         //[HttpGet("{id}")]
         //public async Task<IActionResult> GetById(int id)
         //{
-        //    var request = await _donationRequestService.GetByIdAsync(id);
+        //    var request = await _donationRequestService.GetBloodTypeByIdAsync(id);
         //    if (request == null) return NotFound();
         //    return Ok(request);
         //}

@@ -3,7 +3,7 @@
     public enum StatusInventory
     {
         Available = 1,
-        LowStok = 2,
+        LowStock = 2,
         NotAvailable = 3,
         Expired = 4,
 

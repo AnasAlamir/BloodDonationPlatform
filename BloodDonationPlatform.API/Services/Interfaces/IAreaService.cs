@@ -7,6 +7,6 @@ namespace BloodDonationPlatform.API.Services.Interfaces
     public interface IAreaService
     {
         Task<AreaDto?> GetByIdAsync(int id);
-        Task<IEnumerable<AreaDto>> GetAllAsync();
+        Task<IEnumerable<AreaDto>> GetAllAreasAsync();
     }
 }

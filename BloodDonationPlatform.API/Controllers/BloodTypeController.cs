@@ -16,15 +16,15 @@ namespace BloodDonationPlatform.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAllBloodTypes()
         {
-            var bloodTypes = await _bloodTypeService.GetAllAsync();
+            var bloodTypes = await _bloodTypeService.GetAllBloodTypesAsync();
             return Ok(bloodTypes);
         }
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(int id)
+        public async Task<IActionResult> GetBloodTypeById(int id)
         {
-            var bloodType = await _bloodTypeService.GetByIdAsync(id);
+            var bloodType = await _bloodTypeService.GetBloodTypeByIdAsync(id);
             return Ok(bloodType);
         }
     }

@@ -18,7 +18,7 @@ namespace BloodDonationPlatform.API.Services.Services
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
-        public async Task<IEnumerable<AreaDto>> GetAllAsync()
+        public async Task<IEnumerable<AreaDto>> GetAllAreasAsync()
         {
             var areas = await _unitOfWork.AreaRepository.GetAllAsync();
             return _mapper.Map<IEnumerable<AreaDto>>(areas);

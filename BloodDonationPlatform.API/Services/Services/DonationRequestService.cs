@@ -31,11 +31,11 @@ namespace BloodDonationPlatform.API.Services.Services
         //    var donationRequest = _mapper.Map<DonationRequest>(dto);
         //    await _unitOfWork.DonationRequestRepository.InsertAsync(donationRequest);
         //    await _unitOfWork.SaveAsync();
-        //    var createdDonationRequest = await _unitOfWork.DonationRequestRepository.GetByIdAsync(donationRequest.AreaId);
+        //    var createdDonationRequest = await _unitOfWork.DonationRequestRepository.GetBloodTypeByIdAsync(donationRequest.AreaId);
         //    if (createdDonationRequest == null)
         //        throw new InvalidOperationException();
 
-        //    var requests = await _unitOfWork.DonationRequestRepository.GetAllAsync();
+        //    var requests = await _unitOfWork.DonationRequestRepository.GetAllAreasAsync();
 
         //    var pendingCount = requests.Where(r => r.StatesRequest != StatesRequest.Completed &&
         //                                           r.HospitalId == donationRequest.HospitalId).ToList().Count;

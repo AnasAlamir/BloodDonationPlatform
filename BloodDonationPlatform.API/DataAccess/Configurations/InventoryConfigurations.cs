@@ -3,6 +3,7 @@
     using BloodDonationPlatform.API.DataAccess.Models;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
     using Microsoft.EntityFrameworkCore;
+    using System.Reflection.Emit;
 
     public class InventoryConfigurations : IEntityTypeConfiguration<Inventory>
     {
@@ -26,6 +27,15 @@
             builder.Property(o => o.StatusInventory)
                 .HasConversion(s => s.ToString(), s => Enum.Parse<StatusInventory>(s));
 
+            builder.Property(i => i.StatusInventory)
+                .HasConversion<int>() // store enum as int
+                .HasComputedColumnSql(@"
+                CASE
+                    WHEN [ExpirationDate] < GETUTCDATE() THEN 4
+                    WHEN [CurrentQuantity] <= 0 THEN 3
+                    WHEN [CurrentQuantity] < [MinimunQuantity] THEN 2
+                    ELSE 1
+                END", stored: false);
         }
     }
 }

@@ -5,7 +5,7 @@ namespace BloodDonationPlatform.API.Services.Interfaces
 {
     public interface IBloodTypeService
     {
-        Task<BloodTypeDto?> GetByIdAsync(int id);
-        Task<IEnumerable<BloodTypeDto>> GetAllAsync();
+        Task<BloodTypeDto?> GetBloodTypeByIdAsync(int id);
+        Task<IEnumerable<BloodTypeDto>> GetAllBloodTypesAsync();
     }
 }

@@ -17,13 +17,13 @@ namespace BloodDonationPlatform.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAllAreas()
         {
-            var areas = await _areaService.GetAllAsync();
+            var areas = await _areaService.GetAllAreasAsync();
             return Ok(areas);
         }
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(int id)
+        public async Task<IActionResult> GetAreaById(int id)
         {
             var area = await _areaService.GetByIdAsync(id);
             return Ok(area);

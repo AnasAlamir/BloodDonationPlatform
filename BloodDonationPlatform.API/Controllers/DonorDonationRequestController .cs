@@ -22,7 +22,7 @@
 //            [HttpGet]
 //            public async Task<IActionResult> GetAll()
 //            {
-//                var items = await _donorDonationRequestService.GetAllAsync();
+//                var items = await _donorDonationRequestService.GetAllAreasAsync();
 //                return Ok(items);
 //            }
 
@@ -30,7 +30,7 @@
 //            [HttpGet("{id}")]
 //        public async Task<IActionResult> GetById(int id)
 //        {
-//            var item = await _donorDonationRequestService.GetByIdAsync(id);
+//            var item = await _donorDonationRequestService.GetBloodTypeByIdAsync(id);
 //            if (item == null) throw new NotFoundExcptiondonorDonationRequest(id);
 //            return Ok(item);
 //        }

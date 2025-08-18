@@ -12,7 +12,7 @@ namespace BloodDonationPlatform.API.Services.Interfaces
         Task<int> GetOpenRequestsCountByHospitalIdAsync(int hospitalId);
         Task<int> GetPendingRequestsCountByHospitalIdAsync(int hospitalId);
 
-        //Task<GetDonationRequestDTO?> GetByIdAsync(int id);
+        //Task<GetDonationRequestDTO?> GetBloodTypeByIdAsync(int id);
         //Task<bool> UpdateStatusAsync(UpdateDonationRequestStatusDTO dto);
     }
 }

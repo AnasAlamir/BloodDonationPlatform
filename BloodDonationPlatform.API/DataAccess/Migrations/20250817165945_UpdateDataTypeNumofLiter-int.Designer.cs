@@ -4,6 +4,7 @@ using BloodDonationPlatform.API.DataAccess.DataContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BloodDonationPlatform.API.DataAccess.Migrations
 {
     [DbContext(typeof(BloodDonationDbContext))]
-    partial class BloodDonationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250817165945_UpdateDataTypeNumofLiter-int")]
+    partial class UpdateDataTypeNumofLiterint
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -218,6 +221,7 @@ namespace BloodDonationPlatform.API.DataAccess.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("NumOfLiter")
+                        .HasPrecision(10, 2)
                         .HasColumnType("int");
 
                     b.Property<string>("StatesRequest")
@@ -362,10 +366,9 @@ namespace BloodDonationPlatform.API.DataAccess.Migrations
                     b.Property<int>("MinimunQuantity")
                         .HasColumnType("int");
 
-                    b.Property<int>("StatusInventory")
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("int")
-                        .HasComputedColumnSql("\r\n                CASE\r\n                    WHEN [ExpirationDate] < GETUTCDATE() THEN 4\r\n                    WHEN [CurrentQuantity] <= 0 THEN 3\r\n                    WHEN [CurrentQuantity] < [MinimunQuantity] THEN 2\r\n                    ELSE 1\r\n                END", false);
+                    b.Property<string>("StatusInventory")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 

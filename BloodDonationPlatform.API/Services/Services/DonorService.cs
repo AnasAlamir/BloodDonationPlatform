@@ -14,7 +14,7 @@
 
 //        public IEnumerable<Donor> GetAll()
 //        {
-//            return _unitOfWork.DonorRepository.GetAllAsync();
+//            return _unitOfWork.DonorRepository.GetAllAreasAsync();
 //        }
 //    }
 //}

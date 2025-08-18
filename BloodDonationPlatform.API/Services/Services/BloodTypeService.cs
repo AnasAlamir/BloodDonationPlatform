@@ -17,13 +17,13 @@ namespace BloodDonationPlatform.API.Services.Services
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
-        public async Task<IEnumerable<BloodTypeDto>> GetAllAsync()
+        public async Task<IEnumerable<BloodTypeDto>> GetAllBloodTypesAsync()
         {
             var bloodTypes = await _unitOfWork.BloodTypeRepository.GetAllAsync();
             return _mapper.Map<IEnumerable<BloodTypeDto>>(bloodTypes);
         }
 
-        public async Task<BloodTypeDto?> GetByIdAsync(int id)
+        public async Task<BloodTypeDto?> GetBloodTypeByIdAsync(int id)
         {
             var bloodType = await _unitOfWork.BloodTypeRepository.GetByIdAsync(id);
             return _mapper.Map<BloodTypeDto>(bloodType);
