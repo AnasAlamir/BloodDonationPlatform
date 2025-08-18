@@ -7,7 +7,9 @@
 //{
 //    public class ServicesManager(IMapper mapper, IUnitOfWork unitOfWork,BloodDonationDbContext context ) : IServicesManager
 //    {
-//        IHospitalService IServicesManager.HospitalService { get; } = new HospitalService(context,mapper);
+// public IInventoryService InventoryService { get; } = new InventoryService(context,mapper);
+
+//IHospitalService IServicesManager.HospitalService { get; } = new HospitalService(context,mapper);
 
 //        //IDonationRequestService IServicesManager.DonationRequestService { get; } = new DonationRequestService();
 //    }

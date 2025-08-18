@@ -5,6 +5,8 @@ namespace BloodDonationPlatform.API.DataAccess.Interfaces
 {
     public interface IInventoryRepository : IBaseRepository<Inventory>
     {
-        public Task InsertRangeAsync(IEnumerable<Inventory> inventories);
+        Task InsertRangeAsync(IEnumerable<Inventory> inventories);
+        Task<IEnumerable<Inventory>> GetAllByHospitalIdAsync(int id);
+        Task<Inventory?> GetByIdAsync(int id);
     }
 }

@@ -16,20 +16,20 @@ namespace BloodDonationPlatform.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAllHospitals()
         {
             var hospitals = await _hospitalService.GetAllHospitalsAsync();
             return Ok(hospitals);
         }
         [HttpGet("get-all-by-name")]
-        public async Task<IActionResult> GetAllWithName()
+        public async Task<IActionResult> GetAllHospitalWithNameOnly()
         {
             var hospitals = await _hospitalService.GetAllNameHospitalsAsync();
             return Ok(hospitals);
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(int id)
+        public async Task<IActionResult> GetHospitalById(int id)
         {
             var hospital = await _hospitalService.GetHospitalByIdAsync(id);
             if (hospital == null)
@@ -39,7 +39,7 @@ namespace BloodDonationPlatform.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] CreateHospitalDTO dto)
+        public async Task<IActionResult> CreateHospital([FromBody] CreateHospitalDTO dto)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -50,7 +50,7 @@ namespace BloodDonationPlatform.API.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, [FromBody] UpdateHospitalDTO dto)
+        public async Task<IActionResult> UpdateHospital(int id, [FromBody] UpdateHospitalDTO dto)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -63,7 +63,7 @@ namespace BloodDonationPlatform.API.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> DeleteHospital(int id)
         {
             var success = await _hospitalService.DeleteHospitalAsync(id);
             if (!success)

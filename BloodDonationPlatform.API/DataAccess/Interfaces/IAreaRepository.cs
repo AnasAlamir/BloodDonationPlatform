@@ -4,7 +4,7 @@ namespace BloodDonationPlatform.API.DataAccess.Interfaces
 {
     public interface IAreaRepository
     {
-        IEnumerable<Area> GetAll();
-        Area? GetById(int id);
+        Task<IEnumerable<Area>> GetAllAsync();
+        Task<Area?> GetByIdAsync(int id);
     }
 }

@@ -2,6 +2,7 @@
 using BloodDonationPlatform.API.DataAccess.Interfaces;
 using BloodDonationPlatform.API.DataAccess.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 
 namespace BloodDonationPlatform.API.DataAccess.Repositories
 {
@@ -16,14 +17,15 @@ namespace BloodDonationPlatform.API.DataAccess.Repositories
             _dbContext = _context.Set<BloodType>();
         }
 
-        public IEnumerable<BloodType> GetAll()
+        public async Task<IEnumerable<BloodType>> GetAllAsync()
         {
-            return _dbContext.AsEnumerable();
+            return await _dbContext.ToListAsync();
         }
 
-        public BloodType? GetById(int id)
+        public async Task<BloodType?> GetByIdAsync(int id)
         {
-            return _dbContext.Find(id);
+            return await _dbContext.FindAsync(id);
         }
+
     }
 }
