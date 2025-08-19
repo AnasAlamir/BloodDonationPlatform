@@ -19,6 +19,7 @@ namespace BloodDonationPlatform.API.DataAccess
             services.AddScoped<IDonorDonationRequestRepository, DonorDonationRequestRepository>();
             services.AddScoped<IAreaRepository, AreaRepository>();
             services.AddScoped<ICityRepository, CityRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork.UnitOfWork>();
 
             //services.AddScoped<IDbInitializer, DbInitiaLizer>();

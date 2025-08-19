@@ -17,6 +17,7 @@ namespace BloodDonationPlatform.API.Services.Services
         }
         public async Task<bool> DeleteHospitalAsync(int id)///already DELETE INVENTORY as its cascade
         {
+
             var hospital = await _unitOfWork.HospitalRepository.GetByIdAsync(id);
             if (hospital == null) throw new HospitalNotFoundExceptions(id);
 

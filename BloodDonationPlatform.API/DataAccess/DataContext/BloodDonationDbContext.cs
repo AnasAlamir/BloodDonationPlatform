@@ -1,9 +1,10 @@
 ﻿using BloodDonationPlatform.API.DataAccess.Models;
+using BloodDonationPlatform.API.DataAccess.Models.User;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 namespace BloodDonationPlatform.API.DataAccess.DataContext
 {
-    internal class BloodDonationDbContext : DbContext
+    public class BloodDonationDbContext : DbContext
     {
         public BloodDonationDbContext(DbContextOptions<BloodDonationDbContext> options) : base(options)
         {
@@ -24,6 +25,7 @@ namespace BloodDonationPlatform.API.DataAccess.DataContext
         public DbSet<DonationRequest> DonationRequests { get; set; }
         public DbSet<Inventory> Inventories { get; set; }
         public DbSet<BloodType> BloodType { get; set; }
+        public DbSet<User> Users { get; set; }
 
     }
 }

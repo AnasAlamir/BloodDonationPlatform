@@ -11,6 +11,7 @@
         IDonorDonationRequestRepository DonorDonationRequestRepository { get; }
         IAreaRepository AreaRepository { get; }
         ICityRepository CityRepository { get; }
+        IUserRepository UserRepository { get; }
         Task SaveAsync();
     }
 }

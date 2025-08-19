@@ -1,5 +1,6 @@
 ﻿using BloodDonationPlatform.API.DataAccess.DataContext;
 using BloodDonationPlatform.API.DataAccess.Interfaces;
+using BloodDonationPlatform.API.DataAccess.Models.User;
 using BloodDonationPlatform.API.DataAccess.Repositories;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,6 +18,7 @@ namespace BloodDonationPlatform.API.DataAccess.UnitOfWork
         private readonly IDonorDonationRequestRepository _donorDonationRequestRepository;
         private readonly IAreaRepository _areaRepository;
         private readonly ICityRepository _cityRepository;
+        private readonly IUserRepository _userRepository;
 
         public UnitOfWork(BloodDonationDbContext dbContext,
                             IDonorRepository donorRepository,
@@ -27,6 +29,7 @@ namespace BloodDonationPlatform.API.DataAccess.UnitOfWork
                             IInventoryRepository inventoryRepository,
                             IDonorDonationRequestRepository donorDonationRequestRepository,
                             IAreaRepository areaRepository,
+                            IUserRepository userRepository,
                             ICityRepository cityRepository)
         {
             _dbContext = dbContext;
@@ -36,6 +39,7 @@ namespace BloodDonationPlatform.API.DataAccess.UnitOfWork
             _donationRequestRepository = donationRequestRepository;
             _hospitalRepository = hospitalRepository;
             _inventoryRepository = inventoryRepository;
+            _userRepository = userRepository;
             _donorDonationRequestRepository = donorDonationRequestRepository;
             _areaRepository = areaRepository;
             _cityRepository = cityRepository;
@@ -49,7 +53,7 @@ namespace BloodDonationPlatform.API.DataAccess.UnitOfWork
         public IDonorDonationRequestRepository DonorDonationRequestRepository => _donorDonationRequestRepository;
         public IAreaRepository AreaRepository => _areaRepository;
         public ICityRepository CityRepository => _cityRepository;
-
+        public IUserRepository UserRepository => _userRepository;
 
         public async Task SaveAsync()
         {
