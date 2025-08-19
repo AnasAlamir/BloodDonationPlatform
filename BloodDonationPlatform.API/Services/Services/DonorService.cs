@@ -5,37 +5,33 @@ using BloodDonationPlatform.API.Services.DTOs.Doner;
 using Microsoft.EntityFrameworkCore;
 using BloodDonationPlatform.API.Services.Interfaces;
 using System;
+using BloodDonationPlatform.API.DataAccess.Interfaces;
+using BloodDonationPlatform.API.Services.DTOs.Hospital;
 
 public class DonorService : IDonorService
 {
-    private readonly BloodDonationDbContext _context;
+    private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
-
-    public DonorService(BloodDonationDbContext context, IMapper mapper)
+    public DonorService(IUnitOfWork unitOfWork, IMapper mapper)
     {
-        _context = context;
+        _unitOfWork = unitOfWork;
         _mapper = mapper;
     }
-
-    public async Task<DonorDto?> GetDonorByIdAsync(int donorId)
+    public async Task<GetDonorDto?> GetDonorByIdAsync(int donorId)
     {
-        var donor = await _context.Donors
-            .Include(d => d.BloodType)
-            .Include(d => d.Area)
-            .FirstOrDefaultAsync(d => d.Id == donorId);
-
-        return donor == null ? null : _mapper.Map<DonorDto>(donor);
+        var donor = await _unitOfWork.DonorRepository.GetByIdAsync(donorId);
+        return donor == null ? null : _mapper.Map<GetDonorDto>(donor);
     }
 
-    public async Task<List<RequestDashboardDto>> GetRequestsForDonorAsync(int donorId)
-    {
-        var requests = await _context.DonorDonationRequests
-            .Where(r => r.DonorId == donorId)
-            .Include(r => r.DonationRequest)
-                .ThenInclude(dr => dr.Hospital)
-                    .ThenInclude(h => h.Area)
-            .ToListAsync();
+    //public async Task<List<RequestDashboardDto>> GetRequestsForDonorAsync(int donorId)
+    //{
+    //    var requests = await _context.DonorDonationRequests
+    //        .Where(r => r.DonorId == donorId)
+    //        .Include(r => r.DonationRequest)
+    //            .ThenInclude(dr => dr.Hospital)
+    //                .ThenInclude(h => h.Area)
+    //        .ToListAsync();
 
-        return _mapper.Map<List<RequestDashboardDto>>(requests);
-    }
+    //    return _mapper.Map<List<RequestDashboardDto>>(requests);
+    //}
 }

@@ -33,10 +33,6 @@ namespace BloodDonationPlatform.API.Services.Services
         public async Task<IEnumerable<GetBloodInventoryDTO>> GetAllInventoriesByHospitalIdAsync(int hospitalId)
         {
             var inventories = await _unitOfWork.InventoryRepository.GetAllByHospitalIdAsync(hospitalId);
-            //foreach (var inventory in inventories)
-            //{
-            //    inventory.StatusInventory = GetStatus(inventory.CurrentQuantity, inventory.MinimunQuantity,inventory.ExpirationDate);
-            //}
             return _mapper.Map<IEnumerable<GetBloodInventoryDTO>>(inventories);
         }
         //private StatusInventory GetStatus(int quantity, int minimunQuantity, DateTime expirationDate)

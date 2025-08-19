@@ -24,8 +24,8 @@
                    .IsRequired()
                    .HasDefaultValue(10);
 
-            builder.Property(o => o.StatusInventory)
-                .HasConversion(s => s.ToString(), s => Enum.Parse<StatusInventory>(s));
+            //builder.Property(o => o.StatusInventory)
+            //    .HasConversion(s => s.ToString(), s => Enum.Parse<StatusInventory>(s));
 
             builder.Property(i => i.StatusInventory)
                 .HasConversion<int>() // store enum as int

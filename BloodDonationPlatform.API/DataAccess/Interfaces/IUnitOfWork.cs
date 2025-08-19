@@ -2,6 +2,7 @@
 {
     public interface IUnitOfWork
     {
+        IDonorRepository DonorRepository { get; }
         IAdminRepository AdminRepository { get; }
         IBloodTypeRepository BloodTypeRepository { get; }
         IDonationRequestRepository DonationRequestRepository { get; }

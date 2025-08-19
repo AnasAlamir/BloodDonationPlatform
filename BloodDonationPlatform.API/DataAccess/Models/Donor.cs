@@ -3,7 +3,7 @@
     public class Donor : BaseEntity   
     {
         public string Name { get; set; }
-        public int SSN { get; set; }
+        public string SSN { get; set; }
         public DateTime DateOfBirth { get; set; }
         public int BloodTypeId { get; set; }
         public int AreaId { get; set; }

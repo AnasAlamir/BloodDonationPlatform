@@ -4,6 +4,7 @@ using BloodDonationPlatform.API.DataAccess.DataContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BloodDonationPlatform.API.DataAccess.Migrations
 {
     [DbContext(typeof(BloodDonationDbContext))]
-    partial class BloodDonationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250819000059_ChangeStatusInventoryToBeComputed")]
+    partial class ChangeStatusInventoryToBeComputed
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -263,10 +266,9 @@ namespace BloodDonationPlatform.API.DataAccess.Migrations
                         .HasMaxLength(12)
                         .HasColumnType("nvarchar(12)");
 
-                    b.Property<string>("SSN")
-                        .IsRequired()
+                    b.Property<int>("SSN")
                         .HasMaxLength(14)
-                        .HasColumnType("nvarchar(14)");
+                        .HasColumnType("int");
 
                     b.Property<int>("TotalPoints")
                         .HasColumnType("int");

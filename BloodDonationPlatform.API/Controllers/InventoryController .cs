@@ -35,21 +35,5 @@ namespace BloodDonationPlatform.API.Controllers
 
             return Ok(updated);
         }
-        //[HttpPut("update-status")]
-        //public async Task<IActionResult> UpdateStatus()
-        //{
-        //    await _inventoryService.UpdateInventoryStatusAsync();
-        //    return NoContent();
-        //}
-        //[HttpPost]
-        //public async Task<IActionResult> AddInventory([FromBody] UpdateBloodInventoryDTO dto)
-        //{
-        //    if (!ModelState.IsValid)
-        //        return BadRequest(ModelState);
-
-        //    var result = await _inventoryService.AddInventoryAsync(dto);
-        //    return Ok(result);
-        //}
-
     }
 }

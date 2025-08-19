@@ -8,6 +8,10 @@ public class DonorProfile : Profile
 {
     public DonorProfile()
     {
-        CreateMap<DonorDto, Donor>();
+        CreateMap<Donor, GetDonorDto>()
+           .ForMember(dest => dest.AreaName,
+                   opt => opt.MapFrom(src => src.Area.Name))
+           .ForMember(dest => dest.BloodTypeName,
+                   opt => opt.MapFrom(src => src.BloodType.Name));
     }
 }

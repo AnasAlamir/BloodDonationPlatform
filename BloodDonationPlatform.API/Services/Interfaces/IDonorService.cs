@@ -6,9 +6,8 @@ namespace BloodDonationPlatform.API.Services.Interfaces
 {
     public interface IDonorService
     {
-
-        Task<DonorDto?> GetDonorByIdAsync(int donorId);
-        Task<List<RequestDashboardDto>> GetRequestsForDonorAsync(int donorId);
+        Task<GetDonorDto?> GetDonorByIdAsync(int donorId);
+        //Task<List<RequestDashboardDto>> GetRequestsForDonorAsync(int donorId);
     }
 }
 

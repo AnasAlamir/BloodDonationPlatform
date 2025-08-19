@@ -8,6 +8,7 @@ namespace BloodDonationPlatform.API.DataAccess.UnitOfWork
     internal class UnitOfWork : IUnitOfWork
     {
         private readonly BloodDonationDbContext _dbContext;
+        private readonly IDonorRepository _donorRepository;
         private readonly IBloodTypeRepository _bloodTypeRepository;
         private readonly IAdminRepository _adminRepository;
         private readonly IDonationRequestRepository _donationRequestRepository;
@@ -18,6 +19,7 @@ namespace BloodDonationPlatform.API.DataAccess.UnitOfWork
         private readonly ICityRepository _cityRepository;
 
         public UnitOfWork(BloodDonationDbContext dbContext,
+                            IDonorRepository donorRepository,
                             IBloodTypeRepository bloodTypeRepository,
                             IAdminRepository adminRepository,
                             IDonationRequestRepository donationRequestRepository,
@@ -28,6 +30,7 @@ namespace BloodDonationPlatform.API.DataAccess.UnitOfWork
                             ICityRepository cityRepository)
         {
             _dbContext = dbContext;
+            _donorRepository = donorRepository;
             _bloodTypeRepository = bloodTypeRepository;
             _adminRepository = adminRepository;
             _donationRequestRepository = donationRequestRepository;
@@ -37,7 +40,7 @@ namespace BloodDonationPlatform.API.DataAccess.UnitOfWork
             _areaRepository = areaRepository;
             _cityRepository = cityRepository;
         }
-
+        public IDonorRepository DonorRepository => _donorRepository;
         public IBloodTypeRepository BloodTypeRepository => _bloodTypeRepository;
         public IAdminRepository AdminRepository => _adminRepository;
         public IDonationRequestRepository DonationRequestRepository => _donationRequestRepository;
