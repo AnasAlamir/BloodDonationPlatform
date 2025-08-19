@@ -1,4 +1,5 @@
 ﻿using BloodDonationPlatform.API.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 [ApiController]
@@ -14,6 +15,7 @@ public class DonorController : ControllerBase
     /// <summary>
     /// شاشة بيانات المتبرع
     /// </summary>
+    [Authorize("Doner")]    
     [HttpGet("{donorId}")]
     public async Task<IActionResult> GetDonorById(int donorId)
     {

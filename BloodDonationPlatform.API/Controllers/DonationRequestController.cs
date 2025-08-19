@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using BloodDonationPlatform.API.Services.DTOs.DonationRequest;
-using BloodDonationPlatform.API.Services.Interfaces;
-using AutoMapper;
-using BloodDonationPlatform.API.Services.DTOs.DonorDonationRequest;
+﻿using AutoMapper;
+using BloodDonationPlatform.API.DataAccess.Models;
 using BloodDonationPlatform.API.Exceptions;
+using BloodDonationPlatform.API.Services.DTOs.DonationRequest;
+using BloodDonationPlatform.API.Services.DTOs.DonorDonationRequest;
+using BloodDonationPlatform.API.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace BloodDonationPlatform.API.Controllers
@@ -18,31 +20,35 @@ namespace BloodDonationPlatform.API.Controllers
         {
             _donationRequestService = donationRequestService;
         }
+        [Authorize(Roles = "Hospital")]
         [HttpGet("hospital/active/{hospitalId}")]
         public async Task<IActionResult> GetAllActiveByHospitalId(int hospitalId)
         {
             var requests = await _donationRequestService.GetAllActiveRequestsByHospitalIdAsync(hospitalId);
             return Ok(requests);
         }
+        [Authorize(Roles = "Hospital")]
         [HttpGet("hospital/completed/{hospitalId}")]
         public async Task<IActionResult> GetAllCompletedByHospitalId(int hospitalId)
         {
             var requests = await _donationRequestService.GetAllCompletedRequestsByHospitalIdAsync(hospitalId);
             return Ok(requests);
         }
+        [Authorize(Roles = "Hospital")]
         [HttpGet("hospital/open-requests/{hospitalId}")]
         public async Task<IActionResult> GetOpenRequestsCountByHospitalId(int hospitalId)
         {
             var count = await _donationRequestService.GetOpenRequestsCountByHospitalIdAsync(hospitalId);
             return Ok(count);
         }
+        [Authorize(Roles = "Hospital")]
         [HttpGet("hospital/pending-requests/{hospitalId}")]
         public async Task<IActionResult> GetPendingRequestsCountByHospitalId(int hospitalId)
         {
             var count = await _donationRequestService.GetPendingRequestsCountByHospitalIdAsync(hospitalId);
             return Ok(count);
         }
-
+        [Authorize(Roles = "Hospital")]
         // POST: api/DonationRequest
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreateHospitalDonationRequestDTO dto)
@@ -54,7 +60,7 @@ namespace BloodDonationPlatform.API.Controllers
             //return CreatedAtAction(nameof(GetById), new { id = created.AreaId }, created);
         }
 
-
+        [Authorize(Roles = "Doner")]
         [HttpPut("donor/{donorDonationRequestId}/approve")]
         public async Task<IActionResult> ApproveDonationRequestByDonorDonationRequestId(int donorDonationRequestId)
         {
@@ -63,7 +69,7 @@ namespace BloodDonationPlatform.API.Controllers
                 return BadRequest(new { Message = "Unable to approve the request. It may be already completed or invalid." });
             return Ok(result);
         }
-
+        [Authorize(Roles = "Doner")]
         [HttpPut("donor/{donorDonationRequestId}/reject")]
         public async Task<IActionResult> RejectDonationRequestByDonorDonationRequestId(int donorDonationRequestId)
         {

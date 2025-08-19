@@ -27,7 +27,7 @@ namespace BloodDonationPlatform.API.Controllers
             var hospitals = await _hospitalService.GetAllNameHospitalsAsync();
             return Ok(hospitals);
         }
-
+        
         [HttpGet("{id}")]
         public async Task<IActionResult> GetHospitalById(int id)
         {

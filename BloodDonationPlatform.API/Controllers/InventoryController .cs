@@ -3,10 +3,12 @@ using BloodDonationPlatform.API.Services.DTOs.Hospital;
 using BloodDonationPlatform.API.Services.DTOs.Inventory;
 using BloodDonationPlatform.API.Services.Interfaces;
 using BloodDonationPlatform.API.Services.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BloodDonationPlatform.API.Controllers
 {
+    [Authorize(Roles = "Hospital")]
     [ApiController]
     [Route("api/[controller]")]
     public class InventoryController : ControllerBase
