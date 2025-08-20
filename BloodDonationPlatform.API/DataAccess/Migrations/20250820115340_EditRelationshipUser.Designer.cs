@@ -4,6 +4,7 @@ using BloodDonationPlatform.API.DataAccess.DataContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BloodDonationPlatform.API.DataAccess.Migrations
 {
     [DbContext(typeof(BloodDonationDbContext))]
-    partial class BloodDonationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250820115340_EditRelationshipUser")]
+    partial class EditRelationshipUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -475,7 +478,7 @@ namespace BloodDonationPlatform.API.DataAccess.Migrations
                     b.HasOne("BloodDonationPlatform.API.DataAccess.Models.User.User", "User")
                         .WithOne("Donor")
                         .HasForeignKey("BloodDonationPlatform.API.DataAccess.Models.Donor", "UserId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Area");
@@ -515,7 +518,7 @@ namespace BloodDonationPlatform.API.DataAccess.Migrations
                     b.HasOne("BloodDonationPlatform.API.DataAccess.Models.User.User", "User")
                         .WithOne("Hospital")
                         .HasForeignKey("BloodDonationPlatform.API.DataAccess.Models.Hospital", "UserId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Area");

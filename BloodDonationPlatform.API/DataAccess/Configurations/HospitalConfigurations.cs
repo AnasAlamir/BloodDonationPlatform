@@ -14,6 +14,11 @@ namespace BloodDonationPlatform.API.DataAccess.Configurations
                    .WithMany(a => a.Hospitals)
                    .HasForeignKey(h => h.AreaId)
                    .OnDelete(DeleteBehavior.Restrict);
+          
+                      builder.HasOne(h => h.User)
+          .WithOne(u => u.Hospital)
+          .HasForeignKey<Hospital>(h => h.UserId)
+          .OnDelete(DeleteBehavior.Restrict);
 
             builder.HasMany(h => h.DonationRequests)
                    .WithOne(dr => dr.Hospital)

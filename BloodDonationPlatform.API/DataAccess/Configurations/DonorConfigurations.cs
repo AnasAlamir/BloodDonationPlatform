@@ -23,7 +23,12 @@ public class DonorConfigurations : IEntityTypeConfiguration<Donor>
 
         builder.Property(d => d.PhoneNumber)
             .HasMaxLength(12);
-           
+
+        builder.HasOne(d => d.User)
+     .WithOne(u => u.Donor)
+     .HasForeignKey<Donor>(d => d.UserId)
+     .OnDelete(DeleteBehavior.Restrict);
+
         builder.HasMany(d => d.DonorDonationRequests)
                .WithOne(ddr => ddr.Donor)
                .HasForeignKey(ddr => ddr.DonorId)
