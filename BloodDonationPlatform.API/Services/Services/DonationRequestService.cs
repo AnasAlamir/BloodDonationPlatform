@@ -5,6 +5,7 @@ using BloodDonationPlatform.API.Exceptions;
 using BloodDonationPlatform.API.Services.DTOs.DonationRequest;
 using BloodDonationPlatform.API.Services.DTOs.DonorDonationRequest;
 using BloodDonationPlatform.API.Services.Interfaces;
+using System.Drawing;
 namespace BloodDonationPlatform.API.Services.Services
 {
     public class DonationRequestService : IDonationRequestService
@@ -27,10 +28,17 @@ namespace BloodDonationPlatform.API.Services.Services
 
             var allDonors = await _unitOfWork.DonorRepository.GetAllAsync();
             var eligibleDonors = allDonors
-                .Where(donor => donor.BloodTypeId == dto.BloodTypeId &&
-                            donor.AreaId == hospital.AreaId &&
-                            (donor.DonationRequests?.All(dr => dr.LastDateOfDonation <= DateTime.UtcNow.AddMonths(-3)) ?? true))
-                .ToList();
+                                    .Where(donor =>
+                                        donor.BloodTypeId == dto.BloodTypeId &&
+                                        donor.AreaId == hospital.AreaId &&
+                                        (
+                                            donor.DonorDonationRequests == null ||
+                                            !donor.DonorDonationRequests.Any() || // never donated → eligible
+                                            donor.DonorDonationRequests.Max(dr => dr.LastDateOfDonation) <= DateTime.UtcNow.AddMonths(-3) // last donation ≥ 3 months ago
+                                        )
+                                    )
+                                    .ToList();
+
             var donorDonationRequests = eligibleDonors
                 .Select(donor => new DonorDonationRequest
                 {
@@ -64,20 +72,24 @@ namespace BloodDonationPlatform.API.Services.Services
         public async Task<int> GetOpenRequestsCountByHospitalIdAsync(int hospitalId)
         {
             var requests = await _unitOfWork.DonationRequestRepository.GetAllAsync();
-            var activeRequests = requests.Where(r => r.StatesRequest != StatesRequest.Completed && r.HospitalId == hospitalId);
+            var activeRequests = requests.Where(r => r.StatesRequest == StatesRequest.Open && r.HospitalId == hospitalId);
             return activeRequests.Count();
         }
-        public async Task<int> GetPendingRequestsCountByHospitalIdAsync(int hospitalId)
+        public async Task<int> GetCompletedRequestsCountByHospitalIdAsync(int hospitalId)
         {
             var requests = await _unitOfWork.DonationRequestRepository.GetAllAsync();
-            var activeRequests = requests.Where(r => r.StatesRequest == StatesRequest.Pending && r.HospitalId == hospitalId);
+            var activeRequests = requests.Where(r => r.StatesRequest == StatesRequest.Completed && r.HospitalId == hospitalId);
             return activeRequests.Count();
         }
         public async Task<IEnumerable<GetDonorDonationRequestDTO>> GetAllRequestsByDonorIdAsync(int donorId)
         {
             var requests = await _unitOfWork.DonorDonationRequestRepository.GetAllByDonorIdAsync(donorId);
             var activeRequests = requests.Where(r => r.DonationRequest.StatesRequest != StatesRequest.Completed);
-            return _mapper.Map<List<GetDonorDonationRequestDTO>>(activeRequests);
+            var lastDateOfDonation = activeRequests.Max(r => r.LastDateOfDonation);
+            var requestsToReturn = activeRequests.Where(r => r.DonorApprovalStatus == true ||
+                                                                (r.DonorApprovalStatus == null &&
+                                                                 lastDateOfDonation <= DateTime.UtcNow.AddMonths(-3)));
+            return _mapper.Map<List<GetDonorDonationRequestDTO>>(requestsToReturn);
         }
         public async Task<bool> ApproveDonationRequestByDonorDonationRequestIdAsync(int donorDonationRequestId)
         {
@@ -187,7 +199,7 @@ namespace BloodDonationPlatform.API.Services.Services
 //// عرض الطلبات في Dashboard المستشفى
 //public async Task<List<RequestDashboardDto>> GetDashboardRequestsAsync()
 //{
-//    var requests = await _context.DonationRequests
+//    var requests = await _context.DonorDonationRequests
 //        .Include(r => r.BloodType)
 //        .ToListAsync();
 

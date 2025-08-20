@@ -24,7 +24,7 @@ public class DonorConfigurations : IEntityTypeConfiguration<Donor>
         builder.Property(d => d.PhoneNumber)
             .HasMaxLength(12);
            
-        builder.HasMany(d => d.DonationRequests)
+        builder.HasMany(d => d.DonorDonationRequests)
                .WithOne(ddr => ddr.Donor)
                .HasForeignKey(ddr => ddr.DonorId)
                .OnDelete(DeleteBehavior.Cascade);

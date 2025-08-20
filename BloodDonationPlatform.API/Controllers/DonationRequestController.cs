@@ -36,16 +36,16 @@ namespace BloodDonationPlatform.API.Controllers
             var count = await _donationRequestService.GetOpenRequestsCountByHospitalIdAsync(hospitalId);
             return Ok(count);
         }
-        [HttpGet("hospital/pending-requests/{hospitalId}")]
-        public async Task<IActionResult> GetPendingRequestsCountByHospitalId(int hospitalId)
+        [HttpGet("hospital/completed-requests/{hospitalId}")]
+        public async Task<IActionResult> GetCompletedRequestsCountByHospitalId(int hospitalId)
         {
-            var count = await _donationRequestService.GetPendingRequestsCountByHospitalIdAsync(hospitalId);
+            var count = await _donationRequestService.GetCompletedRequestsCountByHospitalIdAsync(hospitalId);
             return Ok(count);
         }
 
         // POST: api/DonationRequest
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] CreateHospitalDonationRequestDTO dto)
+        public async Task<IActionResult> CreateDonationRequest([FromBody] CreateHospitalDonationRequestDTO dto)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
