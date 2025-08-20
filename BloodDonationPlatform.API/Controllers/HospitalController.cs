@@ -1,6 +1,7 @@
 ﻿using BloodDonationPlatform.API.Exceptions;
 using BloodDonationPlatform.API.Services.DTOs.Hospital;
 using BloodDonationPlatform.API.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 namespace BloodDonationPlatform.API.Controllers
 {
@@ -27,7 +28,7 @@ namespace BloodDonationPlatform.API.Controllers
             var hospitals = await _hospitalService.GetAllNameHospitalsAsync();
             return Ok(hospitals);
         }
-        
+
         [HttpGet("{id}")]
         public async Task<IActionResult> GetHospitalById(int id)
         {
@@ -37,7 +38,17 @@ namespace BloodDonationPlatform.API.Controllers
 
             return Ok(hospital);
         }
+        [Authorize(Roles = "Hospital")]
+        [HttpGet("profile")]
+        public async Task<IActionResult> GetHospitalByIdProfile()
+        {
+            var hospitalId = int.Parse(User.FindFirst("HospitalId")!.Value);
+            var hospital = await _hospitalService.GetHospitalByIdAsync(hospitalId);
+            if (hospital == null)
+                return NotFound($"Hospital with ID {hospitalId} not found.");
 
+            return Ok(hospital);
+        }
         [HttpPost]
         public async Task<IActionResult> CreateHospital([FromBody] CreateHospitalDTO dto)
         {
