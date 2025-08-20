@@ -7,7 +7,7 @@ namespace BloodDonationPlatform.API.Services.Interfaces
 {
     public interface IDonationRequestService
     {
-        Task<GetHospitalDonationRequestDTO> CreateDonationRequestAsync(CreateHospitalDonationRequestDTO dto);
+        Task<GetHospitalDonationRequestDTO> CreateDonationRequestAsync(int hospitalId, CreateHospitalDonationRequestDTO dto);
         Task<IEnumerable<GetHospitalDonationRequestDTO>> GetAllActiveRequestsByHospitalIdAsync(int hospitalId);
         Task<IEnumerable<GetHospitalDonationRequestDTO>> GetAllCompletedRequestsByHospitalIdAsync(int hospitalId);
         Task<int> GetOpenRequestsCountByHospitalIdAsync(int hospitalId);

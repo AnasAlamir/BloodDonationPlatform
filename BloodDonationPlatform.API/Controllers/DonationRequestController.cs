@@ -61,8 +61,8 @@ namespace BloodDonationPlatform.API.Controllers
         public async Task<IActionResult> CreateDonationRequest([FromBody] CreateHospitalDonationRequestDTO dto)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
-
-            var created = await _donationRequestService.CreateDonationRequestAsync(dto);
+            var hospitalId = int.Parse(User.FindFirst("HospitalId")!.Value);
+            var created = await _donationRequestService.CreateDonationRequestAsync(hospitalId, dto);
             return Ok(created);
             //return CreatedAtAction(nameof(GetById), new { id = created.AreaId }, created);
         }

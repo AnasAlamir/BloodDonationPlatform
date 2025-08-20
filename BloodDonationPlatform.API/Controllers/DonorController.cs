@@ -12,7 +12,7 @@ public class DonorController : ControllerBase
     {
         _donorService = donorService;
     }
-    [Authorize("Donor")]    
+    [Authorize(Roles = "Donor")]
     [HttpGet]
     public async Task<IActionResult> GetDonorById()
     {
