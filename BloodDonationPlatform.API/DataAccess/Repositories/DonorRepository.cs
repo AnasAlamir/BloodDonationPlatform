@@ -10,12 +10,18 @@ namespace BloodDonationPlatform.API.DataAccess.Repositories
         public DonorRepository(BloodDonationDbContext dbContext) : base(dbContext)
         {
         }
+        public override async Task<IEnumerable<Donor>> GetAllAsync()
+        {
+            return await _entity
+                .Include(d => d.DonorDonationRequests)
+                .ToListAsync();
+        }
         public override async Task<Donor?> GetByIdAsync(int id)
         {
             return await _entity
-                    .Include(r => r.BloodType)
-                    .Include(r => r.Area)
-                    .FirstOrDefaultAsync(r => r.Id == id);
+                    .Include(d => d.BloodType)
+                    .Include(d => d.Area)
+                    .FirstOrDefaultAsync(d => d.Id == id);
         }
     }
 }

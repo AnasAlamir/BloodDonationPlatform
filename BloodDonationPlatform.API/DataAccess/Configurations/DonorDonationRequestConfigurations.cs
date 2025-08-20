@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
      {
 
         builder.HasOne(ddr => ddr.Donor)
-               .WithMany(d => d.DonationRequests)
+               .WithMany(d => d.DonorDonationRequests)
                .HasForeignKey(ddr => ddr.DonorId)
                .OnDelete(DeleteBehavior.Cascade);
 

@@ -45,7 +45,7 @@ namespace BloodDonationPlatform.API.DataAccess.Migrations
 
                     b.HasIndex("CityId");
 
-                    b.ToTable("Admins");
+                    b.ToTable("Admins", (string)null);
                 });
 
             modelBuilder.Entity("BloodDonationPlatform.API.DataAccess.Models.Area", b =>
@@ -67,7 +67,7 @@ namespace BloodDonationPlatform.API.DataAccess.Migrations
 
                     b.HasIndex("CityId");
 
-                    b.ToTable("Areas");
+                    b.ToTable("Areas", (string)null);
 
                     b.HasData(
                         new
@@ -116,7 +116,7 @@ namespace BloodDonationPlatform.API.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("BloodType");
+                    b.ToTable("BloodType", (string)null);
 
                     b.HasData(
                         new
@@ -175,7 +175,7 @@ namespace BloodDonationPlatform.API.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Cities");
+                    b.ToTable("Cities", (string)null);
 
                     b.HasData(
                         new
@@ -230,7 +230,7 @@ namespace BloodDonationPlatform.API.DataAccess.Migrations
 
                     b.HasIndex("HospitalId");
 
-                    b.ToTable("DonationRequests");
+                    b.ToTable("DonationRequests", (string)null);
                 });
 
             modelBuilder.Entity("BloodDonationPlatform.API.DataAccess.Models.Donor", b =>
@@ -277,7 +277,7 @@ namespace BloodDonationPlatform.API.DataAccess.Migrations
 
                     b.HasIndex("BloodTypeId");
 
-                    b.ToTable("Donors");
+                    b.ToTable("Donors", (string)null);
                 });
 
             modelBuilder.Entity("BloodDonationPlatform.API.DataAccess.Models.DonorDonationRequest", b =>
@@ -306,7 +306,7 @@ namespace BloodDonationPlatform.API.DataAccess.Migrations
 
                     b.HasIndex("DonorId");
 
-                    b.ToTable("DonorDonationRequests");
+                    b.ToTable("DonorDonationRequests", (string)null);
                 });
 
             modelBuilder.Entity("BloodDonationPlatform.API.DataAccess.Models.Hospital", b =>
@@ -335,7 +335,7 @@ namespace BloodDonationPlatform.API.DataAccess.Migrations
 
                     b.HasIndex("AreaId");
 
-                    b.ToTable("Hospitals");
+                    b.ToTable("Hospitals", (string)null);
                 });
 
             modelBuilder.Entity("BloodDonationPlatform.API.DataAccess.Models.Inventory", b =>
@@ -374,7 +374,7 @@ namespace BloodDonationPlatform.API.DataAccess.Migrations
 
                     b.HasIndex("HospitalId");
 
-                    b.ToTable("Inventories");
+                    b.ToTable("Inventories", (string)null);
                 });
 
             modelBuilder.Entity("BloodDonationPlatform.API.DataAccess.Models.User.User", b =>

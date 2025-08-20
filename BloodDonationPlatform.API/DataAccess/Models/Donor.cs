@@ -13,6 +13,6 @@
 
         public BloodType BloodType { get; set; }
         public Area Area { get; set; }
-        public ICollection<DonorDonationRequest> DonationRequests { get; set; }
+        public ICollection<DonorDonationRequest> DonorDonationRequests { get; set; }
     }
 }

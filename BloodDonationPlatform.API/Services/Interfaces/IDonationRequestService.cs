@@ -11,7 +11,7 @@ namespace BloodDonationPlatform.API.Services.Interfaces
         Task<IEnumerable<GetHospitalDonationRequestDTO>> GetAllActiveRequestsByHospitalIdAsync(int hospitalId);
         Task<IEnumerable<GetHospitalDonationRequestDTO>> GetAllCompletedRequestsByHospitalIdAsync(int hospitalId);
         Task<int> GetOpenRequestsCountByHospitalIdAsync(int hospitalId);
-        Task<int> GetPendingRequestsCountByHospitalIdAsync(int hospitalId);
+        Task<int> GetCompletedRequestsCountByHospitalIdAsync(int hospitalId);
         Task<IEnumerable<GetDonorDonationRequestDTO>> GetAllRequestsByDonorIdAsync(int donorId);
         Task<bool> ApproveDonationRequestByDonorDonationRequestIdAsync(int donorDonationRequestId);
         Task<bool> RejectDonationRequestByDonorDonationRequestIdAsync(int donorDonationRequestId);

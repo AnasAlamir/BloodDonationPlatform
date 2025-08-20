@@ -7,7 +7,7 @@
         public int HospitalId { get; set; }
         public int BloodTypeId { get; set; }
         public int NumOfLiter { get; set; }
-        public StatesRequest StatesRequest { get; set; } = StatesRequest.Pending;
+        public StatesRequest StatesRequest { get; set; } = StatesRequest.Open;
 
 
         public Hospital Hospital { get; set; }
