@@ -19,21 +19,22 @@ namespace BloodDonationPlatform.API.Controllers
         {
             _inventoryService = inventoryService;
         }
-        [HttpGet("{hospitalId}")]
-        public async Task<IActionResult> GetAllInventoriesByHospitalIdAsync(int hospitalId)
+        [HttpGet]
+        public async Task<IActionResult> GetAllInventoriesByHospitalIdAsync()
         {
+            var hospitalId = int.Parse(User.FindFirst("HospitalId")!.Value);
             var inventories = await _inventoryService.GetAllInventoriesByHospitalIdAsync(hospitalId);
             return Ok(inventories);
         }
-        [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateInventoryById(int id, [FromBody] UpdateBloodInventoryDTO dto)
+        [HttpPut("{inventoryId}")]
+        public async Task<IActionResult> UpdateInventoryById(int inventoryId, [FromBody] UpdateBloodInventoryDTO dto)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var updated = await _inventoryService.UpdateInventoryByIdAsync(id, dto);
+            var updated = await _inventoryService.UpdateInventoryByIdAsync(inventoryId, dto);
             if (updated == null)
-                throw new HospitalNotFoundExceptions(id);
+                throw new ArgumentException("inventoryId not found");
 
             return Ok(updated);
         }

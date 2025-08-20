@@ -52,6 +52,7 @@ namespace BloodDonationPlatform.API
                         }
                     };
                 });
+            builder.Services.AddAuthorization();
 
             builder.Services.AddOpenApi();
 

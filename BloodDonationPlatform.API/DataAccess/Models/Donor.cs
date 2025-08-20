@@ -1,4 +1,5 @@
-﻿namespace BloodDonationPlatform.API.DataAccess.Models
+﻿using BloodDonationPlatform.API.DataAccess.Models.Users;
+namespace BloodDonationPlatform.API.DataAccess.Models
 {
     public class Donor : BaseEntity   
     {
@@ -13,6 +14,9 @@
 
         public BloodType BloodType { get; set; }
         public Area Area { get; set; }
+        public int UserId { get; set; }
+        public User User { get; set; }
         public ICollection<DonorDonationRequest> DonorDonationRequests { get; set; }
+
     }
 }

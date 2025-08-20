@@ -28,6 +28,12 @@ public class DonorConfigurations : IEntityTypeConfiguration<Donor>
                .WithOne(ddr => ddr.Donor)
                .HasForeignKey(ddr => ddr.DonorId)
                .OnDelete(DeleteBehavior.Cascade);
+
+        builder.HasOne(h => h.User)
+               .WithOne(u => u.Donor)
+               .HasForeignKey<Donor>(h => h.UserId)
+               .OnDelete(DeleteBehavior.Restrict); // prevent SQL cascade cycle
+
     }
 }
 

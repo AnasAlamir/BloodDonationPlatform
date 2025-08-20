@@ -1,9 +1,10 @@
-﻿using BloodDonationPlatform.API.DataAccess.Models.User;
+﻿using BloodDonationPlatform.API.DataAccess.Contracts;
+using BloodDonationPlatform.API.DataAccess.Models.Users;
 
 namespace BloodDonationPlatform.API.DataAccess.Interfaces
 {
-    public interface IUserRepository
+    public interface IUserRepository : IBaseRepository<User>
     {
-        Task<User> GetByIdentifierAsync(string identifier, string password);
+        Task<User?> GetByPhoneNumberAndPasswordAsync(string phoneNumber, string password);
     }
 }

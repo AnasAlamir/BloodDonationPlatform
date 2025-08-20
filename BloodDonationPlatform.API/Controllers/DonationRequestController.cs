@@ -21,31 +21,37 @@ namespace BloodDonationPlatform.API.Controllers
             _donationRequestService = donationRequestService;
         }
         [Authorize(Roles = "Hospital")]
-        [HttpGet("hospital/active/{hospitalId}")]
-        public async Task<IActionResult> GetAllActiveByHospitalId(int hospitalId)
+        [HttpGet("hospital/active")]
+        public async Task<IActionResult> GetAllActiveByHospitalId()
         {
+            var hospitalId = int.Parse(User.FindFirst("HospitalId")!.Value);
+
             var requests = await _donationRequestService.GetAllActiveRequestsByHospitalIdAsync(hospitalId);
             return Ok(requests);
         }
+
         [Authorize(Roles = "Hospital")]
-        [HttpGet("hospital/completed/{hospitalId}")]
-        public async Task<IActionResult> GetAllCompletedByHospitalId(int hospitalId)
+        [HttpGet("hospital/completed")]
+        public async Task<IActionResult> GetAllCompletedByHospitalId()
         {
+            var hospitalId = int.Parse(User.FindFirst("HospitalId")!.Value);
             var requests = await _donationRequestService.GetAllCompletedRequestsByHospitalIdAsync(hospitalId);
             return Ok(requests);
         }
         [Authorize(Roles = "Hospital")]
-        [HttpGet("hospital/open-requests/{hospitalId}")]
-        public async Task<IActionResult> GetOpenRequestsCountByHospitalId(int hospitalId)
+        [HttpGet("hospital/open-requests")]
+        public async Task<IActionResult> GetOpenRequestsCountByHospitalId()
         {
+            var hospitalId = int.Parse(User.FindFirst("HospitalId")!.Value);
             var count = await _donationRequestService.GetOpenRequestsCountByHospitalIdAsync(hospitalId);
             return Ok(count);
         }
 
         [Authorize(Roles = "Hospital")]
-        [HttpGet("hospital/completed-requests/{hospitalId}")]
-        public async Task<IActionResult> GetCompletedRequestsCountByHospitalId(int hospitalId)
+        [HttpGet("hospital/completed-requests")]
+        public async Task<IActionResult> GetCompletedRequestsCountByHospitalId()
         {
+            var hospitalId = int.Parse(User.FindFirst("HospitalId")!.Value);
             var count = await _donationRequestService.GetCompletedRequestsCountByHospitalIdAsync(hospitalId);
             return Ok(count);
         }
@@ -61,7 +67,7 @@ namespace BloodDonationPlatform.API.Controllers
             //return CreatedAtAction(nameof(GetById), new { id = created.AreaId }, created);
         }
 
-        [Authorize(Roles = "Doner")]
+        [Authorize(Roles = "Donor")]
         [HttpPut("donor/{donorDonationRequestId}/approve")]
         public async Task<IActionResult> ApproveDonationRequestByDonorDonationRequestId(int donorDonationRequestId)
         {
@@ -70,16 +76,18 @@ namespace BloodDonationPlatform.API.Controllers
                 return BadRequest(new { Message = "Unable to approve the request. It may be already completed or invalid." });
             return Ok(result);
         }
-        [Authorize(Roles = "Doner")]
+        [Authorize(Roles = "Donor")]
         [HttpPut("donor/{donorDonationRequestId}/reject")]
         public async Task<IActionResult> RejectDonationRequestByDonorDonationRequestId(int donorDonationRequestId)
         {
             var result = await _donationRequestService.RejectDonationRequestByDonorDonationRequestIdAsync(donorDonationRequestId);
             return Ok(result);
         }
-        [HttpGet("donor/{donorId}")]
-        public async Task<IActionResult> GetAllRequestsByDonorId(int donorId)
+        [Authorize(Roles = "Donor")]
+        [HttpGet("donor")]
+        public async Task<IActionResult> GetAllRequestsByDonorId()
         {
+            var donorId = int.Parse(User.FindFirst("DonorId")!.Value);
             var requests = await _donationRequestService.GetAllRequestsByDonorIdAsync(donorId);
             return Ok(requests);
         }

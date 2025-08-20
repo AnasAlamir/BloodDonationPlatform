@@ -24,6 +24,11 @@ namespace BloodDonationPlatform.API.DataAccess.Configurations
                    .WithOne(id => id.Hospital)
                    .HasForeignKey(id => id.HospitalId)
                    .OnDelete(DeleteBehavior.Cascade);
+
+            builder.HasOne(h => h.User)
+                   .WithOne(u => u.Hospital)
+                   .HasForeignKey<Hospital>(h => h.UserId)
+                   .OnDelete(DeleteBehavior.Restrict); // prevent SQL cascade cycle
         }
     }
 }

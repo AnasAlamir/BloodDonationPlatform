@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using BloodDonationPlatform.API.DataAccess.Interfaces;
 using BloodDonationPlatform.API.DataAccess.Models;
+using BloodDonationPlatform.API.DataAccess.Models.Users;
 using BloodDonationPlatform.API.Exceptions;
 using BloodDonationPlatform.API.Services.DTOs.Hospital;
 using BloodDonationPlatform.API.Services.Interfaces;
@@ -54,8 +55,14 @@ namespace BloodDonationPlatform.API.Services.Services
                     Hospital = hospital // navigation property
                 })
                 .ToList();
-
-            await _unitOfWork.HospitalRepository.InsertAsync(hospital);
+            var user = new User
+            {
+                Password = "12345678",
+                Role = UserRoles.Hospital,
+                Hospital = hospital // link navigation property
+            };
+            await _unitOfWork.UserRepository.InsertAsync(user);
+            //await _unitOfWork.HospitalRepository.InsertAsync(hospital);
             await _unitOfWork.InventoryRepository.InsertRangeAsync(inventories);
             await _unitOfWork.SaveAsync();
 

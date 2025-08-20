@@ -22,5 +22,19 @@ namespace BloodDonationPlatform.API.DataAccess.Repositories
                 .Include(h => h.Inventory)
                 .ToListAsync();
         }
+        public override async Task DeleteAsync(int id)
+        {
+            var hospital = await _entity
+                                    .Include(h => h.User)
+                                    .FirstOrDefaultAsync(h => h.Id == id);
+            if (hospital != null)
+            {
+                if (hospital.User != null)
+                {
+                    _dbContext.Users.Remove(hospital.User); // delete user too
+                }
+                _entity.Remove(hospital); // delete hospital
+            }
+        }
     }
 }

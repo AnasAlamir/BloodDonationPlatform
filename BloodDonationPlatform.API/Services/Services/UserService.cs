@@ -23,7 +23,7 @@
 //            var user = await _context.Users
 //          .Include(u => u.Hospital)
 //          .Include(u => u.Donor)
-//          .FirstOrDefaultAsync(u => u.Identifier == identifier && u.Password == password);
+//          .FirstOrDefaultAsync(u => u.PhoneNumber == identifier && u.Password == password);
 
 //            if (user == null)
 //                throw new Exception("Invalid credentials");
@@ -50,9 +50,9 @@ public class UserService : IUserService
         _mapper = mapper;
     }
 
-    public async Task<AuthResultDto> LoginAsync(string identifier, string password)
+    public async Task<AuthResultDto> LoginAsync(string phoneNumber, string password)
     {
-        var user = await _unitOfWork.UserRepository.GetByIdentifierAsync(identifier, password);
+        var user = await _unitOfWork.UserRepository.GetByPhoneNumberAndPasswordAsync(phoneNumber, password);
 
         if (user == null)
             throw new Exception("Invalid credentials");

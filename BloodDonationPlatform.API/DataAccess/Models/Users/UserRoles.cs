@@ -1,4 +1,4 @@
-﻿namespace BloodDonationPlatform.API.DataAccess.Models.User
+﻿namespace BloodDonationPlatform.API.DataAccess.Models.Users
 {
     public enum UserRoles
     {

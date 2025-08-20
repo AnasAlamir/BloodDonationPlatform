@@ -1,5 +1,5 @@
 ﻿using BloodDonationPlatform.API.DataAccess.Models;
-using BloodDonationPlatform.API.DataAccess.Models.User;
+using BloodDonationPlatform.API.DataAccess.Models.Users;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 namespace BloodDonationPlatform.API.DataAccess.DataContext
