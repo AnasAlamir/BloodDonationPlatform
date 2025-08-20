@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BloodDonationPlatform.API.DataAccess.Repositories
 {
-    public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : class
+    internal class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : class
     {
         protected readonly BloodDonationDbContext _dbContext;
         protected readonly DbSet<TEntity> _entity;

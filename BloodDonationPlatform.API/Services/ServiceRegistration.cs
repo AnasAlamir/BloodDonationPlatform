@@ -16,12 +16,15 @@ namespace BloodDonationPlatform.API.Services
             services.AddScoped<IInventoryService, InventoryService>();
             services.AddScoped<IDonationRequestService, DonationRequestService>();
 
+            services.AddScoped<IUserService, UserService>();
+
             services.AddAutoMapper(cfg => cfg.AddProfile<HospitalProfile>(), typeof(HospitalProfile));
             services.AddAutoMapper(cfg => cfg.AddProfile<DonationRequestProfile>(), typeof(DonationRequestProfile));
             services.AddAutoMapper(cfg => cfg.AddProfile<DonorDonationRequestProfile>(), typeof(DonorDonationRequestProfile));
             services.AddAutoMapper(cfg => cfg.AddProfile<BloodTypeProfile>(), typeof(BloodTypeProfile));
             services.AddAutoMapper(cfg => cfg.AddProfile<AreaProfile>(), typeof(AreaProfile));
             services.AddAutoMapper(cfg => cfg.AddProfile<DonorProfile>(), typeof(DonorProfile));
+            services.AddAutoMapper(cfg => cfg.AddProfile<UserProfile>(), typeof(UserProfile));
             return services;
         }
     }

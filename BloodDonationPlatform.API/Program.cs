@@ -5,6 +5,7 @@ using BloodDonationPlatform.API.DataAccess.Repositories;
 using BloodDonationPlatform.API.Services;
 using BloodDonationPlatform.API.Services.Interfaces;
 using BloodDonationPlatform.API.Services.Services;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 
@@ -33,6 +34,25 @@ namespace BloodDonationPlatform.API
             builder.Services.RegisterServices();
 
             builder.Services.AddControllers();
+            builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options =>
+                {
+                    // For APIs: return 401/403 instead of redirecting
+                    options.Events = new CookieAuthenticationEvents
+                    {
+                        OnRedirectToLogin = ctx =>
+                        {
+                            ctx.Response.StatusCode = StatusCodes.Status401Unauthorized;
+                            return Task.CompletedTask;
+                        },
+                        OnRedirectToAccessDenied = ctx =>
+                        {
+                            ctx.Response.StatusCode = StatusCodes.Status403Forbidden;
+                            return Task.CompletedTask;
+                        }
+                    };
+                });
+
             builder.Services.AddOpenApi();
 
             var app = builder.Build();
