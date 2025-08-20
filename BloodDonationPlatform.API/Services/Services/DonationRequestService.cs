@@ -17,14 +17,15 @@ namespace BloodDonationPlatform.API.Services.Services
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
-        public async Task<GetHospitalDonationRequestDTO> CreateDonationRequestAsync(CreateHospitalDonationRequestDTO dto)
+        public async Task<GetHospitalDonationRequestDTO> CreateDonationRequestAsync(int hospitalId, CreateHospitalDonationRequestDTO dto)
         {
-            var hospital = await _unitOfWork.HospitalRepository.GetByIdAsync(dto.HospitalId);
+            var hospital = await _unitOfWork.HospitalRepository.GetByIdAsync(hospitalId);
             if (hospital == null)
-                throw new HospitalNotFoundExceptions(dto.HospitalId);
+                throw new HospitalNotFoundExceptions(hospitalId);
             if (dto.NumOfLiter <= 0)
                 throw new ArgumentException("Cannot create a request with zero quantity");
             var donationRequest = _mapper.Map<DonationRequest>(dto);
+            donationRequest.HospitalId = hospitalId;
 
             var allDonors = await _unitOfWork.DonorRepository.GetAllAsync();
             var eligibleDonors = allDonors
