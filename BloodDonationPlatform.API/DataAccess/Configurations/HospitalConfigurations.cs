@@ -9,6 +9,11 @@ namespace BloodDonationPlatform.API.DataAccess.Configurations
     {
         public void Configure(EntityTypeBuilder<Hospital> builder)
         {
+            builder.Property(d => d.PhoneNumber)
+            .HasMaxLength(12);
+
+            builder.HasIndex(h => h.PhoneNumber)
+           .IsUnique();
 
             builder.HasOne(h => h.Area)
                    .WithMany(a => a.Hospitals)
