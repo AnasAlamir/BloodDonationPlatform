@@ -29,11 +29,11 @@ namespace BloodDonationPlatform.API.DataAccess.Repositories
                                     .FirstOrDefaultAsync(h => h.Id == id);
             if (hospital != null)
             {
+                _entity.Remove(hospital); // delete hospital
                 if (hospital.User != null)
                 {
                     _dbContext.Users.Remove(hospital.User); // delete user too
                 }
-                _entity.Remove(hospital); // delete hospital
             }
         }
     }

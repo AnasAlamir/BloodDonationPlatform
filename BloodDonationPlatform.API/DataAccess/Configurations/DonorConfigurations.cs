@@ -23,7 +23,10 @@ public class DonorConfigurations : IEntityTypeConfiguration<Donor>
 
         builder.Property(d => d.PhoneNumber)
             .HasMaxLength(12);
-           
+
+        builder.HasIndex(h => h.PhoneNumber)
+       .IsUnique();
+
         builder.HasMany(d => d.DonorDonationRequests)
                .WithOne(ddr => ddr.Donor)
                .HasForeignKey(ddr => ddr.DonorId)
