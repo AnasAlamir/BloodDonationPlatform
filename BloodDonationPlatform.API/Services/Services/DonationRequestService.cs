@@ -85,12 +85,14 @@ namespace BloodDonationPlatform.API.Services.Services
         public async Task<IEnumerable<GetDonorDonationRequestDTO>> GetAllRequestsByDonorIdAsync(int donorId)
         {
             var requests = await _unitOfWork.DonorDonationRequestRepository.GetAllByDonorIdAsync(donorId);
-            var activeRequests = requests.Where(r => r.DonationRequest.StatesRequest != StatesRequest.Completed);
-            var lastDateOfDonation = activeRequests
+            var activeOrApprovedRequests = requests.Where(r => r.DonationRequest.StatesRequest != StatesRequest.Completed ||
+                                               (r.DonationRequest.StatesRequest == StatesRequest.Completed &&
+                                                          r.DonorApprovalStatus == true));
+            var lastDateOfDonation = activeOrApprovedRequests
                                             .Select(r => r.LastDateOfDonation)
                                             .DefaultIfEmpty(DateTime.MinValue)
                                             .Max();
-            var requestsToReturn = activeRequests?.Where(r => r.DonorApprovalStatus == true ||
+            var requestsToReturn = activeOrApprovedRequests?.Where(r => r.DonorApprovalStatus == true ||
                                                                 (r.DonorApprovalStatus == null &&
                                                                  lastDateOfDonation <= DateTime.UtcNow.AddMonths(-3)));
             return _mapper.Map<List<GetDonorDonationRequestDTO>>(requestsToReturn);
