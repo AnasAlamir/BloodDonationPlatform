@@ -1,16 +1,6 @@
 using BloodDonationPlatform.API.DataAccess;
-using BloodDonationPlatform.API.DataAccess.DataContext;
-using BloodDonationPlatform.API.DataAccess.Interfaces;
-using BloodDonationPlatform.API.DataAccess.Repositories;
 using BloodDonationPlatform.API.Services;
-using BloodDonationPlatform.API.Services.Interfaces;
-using BloodDonationPlatform.API.Services.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.EntityFrameworkCore;
-using System.Threading.Tasks;
-
-
-
 namespace BloodDonationPlatform.API
 {
     public class Program
@@ -18,26 +8,38 @@ namespace BloodDonationPlatform.API
         public static async Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
             // Add CORS policy
             builder.Services.AddCors(options =>
             {
                 options.AddPolicy("AllowAll", policy =>
                 {
-                    policy.AllowAnyOrigin()       // or .WithOrigins("https://yourflutterapp.com")
-                          .AllowAnyMethod()
-                          .AllowAnyHeader();
+                    policy
+                        .AllowAnyMethod()
+                        .AllowAnyHeader()
+                        .AllowCredentials()                 // important for cookies
+                        .SetIsOriginAllowed(_ => true);     // allow all origins
                 });
             });
 
-            // Add services to the container.
+            // Add services to the container
             builder.Services.RegisterDataAccess(builder.Configuration);
             builder.Services.RegisterServices();
 
             builder.Services.AddControllers();
+
+            //  Cookie authentication
             builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(options =>
                 {
-                    // For APIs: return 401/403 instead of redirecting
+                    options.Cookie.Name = "BloodDonationAuth";
+                    options.Cookie.HttpOnly = true;
+                    options.Cookie.SecurePolicy = CookieSecurePolicy.Always; // only https
+                    options.Cookie.SameSite = SameSiteMode.None; // required for cross-site cookies (Flutter Web)
+                    options.ExpireTimeSpan = TimeSpan.FromHours(1);
+                    options.SlidingExpiration = true;
+
+                    // APIs shouldn’t redirect, just return codes
                     options.Events = new CookieAuthenticationEvents
                     {
                         OnRedirectToLogin = ctx =>
@@ -52,15 +54,23 @@ namespace BloodDonationPlatform.API
                         }
                     };
                 });
-            builder.Services.AddAuthorization();
 
+            builder.Services.AddAuthorization();
             builder.Services.AddOpenApi();
 
             var app = builder.Build();
 
-            app.UseCors("AllowAll");
+            if (!app.Environment.IsDevelopment())
+            {
+                app.UseHsts();
+            }
 
-            // Configure the HTTP request pipeline.
+            //  Middleware order matters
+            app.UseHttpsRedirection();
+            app.UseCors("AllowAll");
+            app.UseAuthentication();
+            app.UseAuthorization();
+
             if (app.Environment.IsDevelopment())
             {
                 app.MapOpenApi();
@@ -69,11 +79,6 @@ namespace BloodDonationPlatform.API
                     options.SwaggerEndpoint("/openapi/v1.json", "OpenAPI V1");
                 });
             }
-
-            app.UseHttpsRedirection();
-
-            app.UseAuthorization();
-
 
             app.MapControllers();
 
