@@ -1,0 +1,16 @@
+- if hospital deleted LastDateOfDonation is deleted as DonorDonationRequest is deleted due to cascade 
+	(must LastDateOfDonation to DateOfDonation in DonorDonationRequest and LastDateOfDonation at donor)
+
+- if hospital updated its area or request bloodType request still show at donor side (wrong)
+
+2 login credentials 	
+
+
+------------------------------------- not now at all
+1-LastDateOfDonation to DateOfDonation in DonorDonationRequest 
+2-GetOpenRequestsCountByHospitalIdAsync
+  GetPendingRequestsCountByHospitalIdAsync
+  i need when at least 1 donor accept to set request status to (in progress) 
+- counts to be joined with GetAllActiveRequestsByHospitalIdAsync
+3- hospital make many requests from same bloodType(??)
+-  rename states Request to RequestStatus in donation Request (not urgent)
