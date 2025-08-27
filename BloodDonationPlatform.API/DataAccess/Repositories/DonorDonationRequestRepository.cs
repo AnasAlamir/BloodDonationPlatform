@@ -29,6 +29,8 @@ namespace BloodDonationPlatform.API.DataAccess.Repositories
         {
             return await _entity
                     .Include(dr => dr.DonationRequest)
+                        .ThenInclude(dr => dr.Hospital)
+                            .ThenInclude(h => h.Inventory)
                     .Include(r => r.Donor)
                     .FirstOrDefaultAsync(dr => dr.Id == donorDonationRequestId);
         }

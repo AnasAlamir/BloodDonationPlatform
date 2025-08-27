@@ -114,6 +114,12 @@ namespace BloodDonationPlatform.API.Services.Services
             request.NumOfLiter -= 1;
             if (request.NumOfLiter <= 0)
                 request.StatesRequest = StatesRequest.Completed;
+
+            var inventoryMatchDonationRequest = donorDonationRequest.DonationRequest.Hospital.Inventory
+                                            .Single(i => i.BloodTypeId == donorDonationRequest.DonationRequest.BloodTypeId);
+            inventoryMatchDonationRequest.CurrentQuantity += 1;
+            _unitOfWork.InventoryRepository.Update(inventoryMatchDonationRequest);
+
             _unitOfWork.DonorDonationRequestRepository.Update(donorDonationRequest);
             _unitOfWork.DonationRequestRepository.Update(request);
             await _unitOfWork.SaveAsync();
